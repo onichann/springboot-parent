@@ -81,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/js/**","/swagger3/**").permitAll()
-                .antMatchers("/","/login2","/home","/redis/**","/oauth/**","/file/**","/api/v2.0/**").permitAll()
+                .antMatchers("/","/home","/redis/**","/oauth/**","/file/**","/api/v2.0/**").permitAll()
                 .antMatchers("/actuator/**").access("hasIpAddress('127.0.0.1')")
                 .anyRequest().authenticated()
                 .and()

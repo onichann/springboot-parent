@@ -3,7 +3,6 @@ package com.wt.springboot.rabbitmq;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -12,7 +11,7 @@ import java.io.IOException;
  * @date 2019-01-21 下午 5:19
  * PROJECT_NAME springBoot
  */
-@Component
+//@Component
 public class RabbitMQReceiver {
 
     @RabbitListener(queues = "msg")

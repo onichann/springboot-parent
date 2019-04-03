@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2019-01-16 下午 5:25
  * PROJECT_NAME springBoot
  */
-@Configuration
+//@Configuration
 public class RabbitMQConfig {
 
     private String msgQueueName = "msg";
