@@ -33,7 +33,7 @@
 </form>
 <iframe name="frame1" frameborder="0" height="40"></iframe>
 
-<iframe name="frame2" frameborder="0" width="100%" height="700" src="/file/display3"></iframe>
+<iframe name="frame2" frameborder="0" width="100%" height="700" src=""></iframe>
 
 <input type="button" value="接口数据传递" onclick="aaa()" style="display: none"/>
 <script>

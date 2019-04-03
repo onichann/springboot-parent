@@ -38,6 +38,13 @@
 			</exclusions>
 		</dependency>
 
+		<!--添加tomcat依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<!--<scope>provided</scope>-->
+		</dependency>
+
 		<!--test-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -83,10 +90,10 @@
 		</dependency>
 
 		<!--thymeleaf-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+		<!--</dependency>-->
 
 		<!--redis-->
 		<dependency>
@@ -149,13 +156,6 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<!--<scope>provided</scope>-->
-		</dependency>
-
-		<!--添加tomcat依赖-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<!--<scope>provided</scope>-->
 		</dependency>
 
