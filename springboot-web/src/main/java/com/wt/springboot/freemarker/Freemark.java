@@ -1,6 +1,5 @@
-package com.wt.springboot.freemarker;//package com.wt.freemarker;
+//package com.wt.springboot.freemarker;
 //
-//import freemarker.template.Configuration;
 //import freemarker.template.Template;
 //import freemarker.template.TemplateException;
 //import sun.misc.BASE64Encoder;
