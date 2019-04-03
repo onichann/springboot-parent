@@ -3,6 +3,8 @@ HELP.md
 /out/
 my.*
 .mvn
+mvnw
+mvnw.cmd
 #!.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
