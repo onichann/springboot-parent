@@ -1,0 +1,46 @@
+﻿git add file
+git commit -m  'message'
+git status
+git diff file
+git log
+git reset --hard HEAD^
+git reset --hard HEAD~100
+git reflog
+git reset --hard 版本号
+git checkout --file 将未添加到暂存区的内容撤销掉，-- 很重要，如果没有 -- 的话，那么命令变成创建分支了
+
+git remote add origin https://...git  git remote add origin git@github.com:onichann/PythonDemo.git
+git push -u origin master 
+
+git clone https://...git
+git checkout -b dev   =git branch dev  +git checkout dev
+git checkout master 切换回master
+git marge dev  在master分支上把dev内容合并过来
+git branch -d dev  删除分支
+git merge –no-ff -m “注释” dev    删除保留分支信息
+
+
+git stash
+git status
+git checkout -b issue-404
+git add
+git commit
+git checkout master
+git marge   –no-ff -m “注释” issue-404
+git branch -d issue-404
+git checkout dev
+git stash list 
+git stash apply
+git stash pop
+
+
+git remote
+git remote -v
+
+git push origin dev
+git checkout -b dev origin/dev
+
+git branch --set-upstream origin/dev dev 
+
+
+

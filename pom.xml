@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.0.RELEASE</version>
+	</parent>
+	<modules>
+		<module>springboot-web</module>
+	</modules>
+
+	<groupId>com.wutong</groupId>
+	<artifactId>springboot-parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>springboot-parent</name>
+	<description>Demo project for Spring Boot</description>
+	<url>http://www.bilibili.com</url>
+
+	<developers>
+		<developer>
+			<id>wutong</id>
+			<name>Tong_Wu</name>
+			<email>wt01278@gmail.com</email>
+			<url>http://www.bilibili.com</url>
+			<organization>bilibili</organization>
+			<organizationUrl>http://www.bilibili.com</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>8</timezone>
+		</developer>
+	</developers>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<commons-fileupload.varsion>1.3.3</commons-fileupload.varsion>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!--Apache Commons FileUpload组件依赖-->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons-fileupload.varsion}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

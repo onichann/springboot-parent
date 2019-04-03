@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 打印查询语句 -->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+
+		<!-- 设置但JDBC类型为空时,某些驱动程序 要指定值,default:OTHER，插入空值时不需要指定类型 -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+
+	<!--<typeAliases>-->
+		<!--&lt;!&ndash;<typeAlias type="com.wt.model.TUser" alias="TUser"/>&ndash;&gt;-->
+	<!--</typeAliases>-->
+	<!--<mappers>-->
+		<!--<mapper resource="com/wt/mapper/LoginMapper.xml"/>-->
+	<!--</mappers>-->
+</configuration>
