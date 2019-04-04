@@ -49,6 +49,6 @@ public class Index2Controller {
 
     @RequestMapping("/index")
     public ModelAndView index(){
-        return new ModelAndView("/jsp/login2");
+        return new ModelAndView("/jsp/jsplogin");
     }
 }

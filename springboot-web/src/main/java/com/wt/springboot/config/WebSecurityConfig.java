@@ -81,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/js/**","/swagger3/**").permitAll()
-                .antMatchers("/","/home","/redis/**","/oauth/**","/file/**","/api/v2.0/**").permitAll()
+                .antMatchers("/","/home","/redis/**","/oauth/**","/file/**","/api/v2.0/**","/index2/**","/jsplogin").permitAll()
                 .antMatchers("/actuator/**").access("hasIpAddress('127.0.0.1')")
                 .anyRequest().authenticated()
                 .and()
@@ -89,9 +89,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/exPage")
+                //用户尝试访问仅限于他们没有的角色的页面时，应用程序将返回状态代码403，这意味着拒绝访问
+                .exceptionHandling().accessDeniedPage("/403Page")
                 .and()
-                .httpBasic().and()
+                .httpBasic()
+                .and()
                 .sessionManagement().maximumSessions(1).expiredUrl("/login");
 
 
