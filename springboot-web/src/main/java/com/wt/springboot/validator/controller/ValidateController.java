@@ -1,8 +1,8 @@
-package com.wt.springboot.controller;
+package com.wt.springboot.validator.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.wt.springboot.pojo.ValidateBean;
+import com.wt.springboot.validator.pojo.ValidateBean;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.http.HttpStatus;

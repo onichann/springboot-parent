@@ -1,7 +1,7 @@
 package com.wt.springboot.validator.impl;
 
 
-import com.wt.springboot.annotation.ListNotHasNullField;
+import com.wt.springboot.validator.annotation.ListNotHasNullField;
 import org.springframework.util.CollectionUtils;
 
 import javax.validation.ConstraintValidator;

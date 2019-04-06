@@ -1,7 +1,7 @@
-package com.wt.springboot.pojo;
+package com.wt.springboot.validator.pojo;
 
 
-import com.wt.springboot.annotation.ListNotHasNullField;
+import com.wt.springboot.validator.annotation.ListNotHasNullField;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

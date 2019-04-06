@@ -1,4 +1,4 @@
-package com.wt.springboot.annotation;
+package com.wt.springboot.validator.annotation;
 
 
 import com.wt.springboot.validator.impl.ListNotHasNullFieldValidatorImpl;

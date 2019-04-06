@@ -1,4 +1,4 @@
-package com.wt.springboot.config;
+package com.wt.springboot.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

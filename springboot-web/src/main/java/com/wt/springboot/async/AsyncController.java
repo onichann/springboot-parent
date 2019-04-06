@@ -25,12 +25,13 @@ public class AsyncController {
     @ResponseBody
     public void page2() throws ExecutionException, InterruptedException, TimeoutException {
         System.out.println("主线程："+Thread.currentThread().getName());
+
         ExecutorService executorService = Executors.newFixedThreadPool(8);
+        //1.
         executorService.submit(() -> System.out.println("子线程："+Thread.currentThread().getName()));
+        //2.
         FutureTask<String> stringFutureTask = new FutureTask<>(() -> "yes");
         Future<?> submit = executorService.submit(stringFutureTask);
-//        TimeUnit.SECONDS.sleep(10);
-//        System.out.println("11111----"+submit.get());
         while (!stringFutureTask.isDone()){
             if(stringFutureTask.isDone()){
                 System.out.println("submitDone="+stringFutureTask.get());
@@ -40,9 +41,15 @@ public class AsyncController {
         System.out.println(stringFutureTask.isDone()+"---------------");
         System.out.println("submit="+stringFutureTask.get());
         System.out.println(stringFutureTask.isDone()+"-------------------");
+        //3
         ExecutorCompletionService executorCompletionService = new ExecutorCompletionService(executorService);
         executorCompletionService.submit(() -> "yes2");
         System.out.println("submit="+executorCompletionService.take().get());
+        //关闭
         executorService.shutdown();
+    }
+
+    public static void main(String[] args) throws  Exception{
+        new AsyncController().page2();
     }
 }

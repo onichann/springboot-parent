@@ -1,11 +1,23 @@
 package com.wt.springboot.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -16,25 +28,6 @@ import java.util.List;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer{
-
-
-//    @Bean
-//    @ConditionalOnClass({Jackson2ObjectMapperBuilder.class})
-//    public ObjectMapper jacksonObjectMapper2(Jackson2ObjectMapperBuilder builder) {
-//        ObjectMapper objectMapper = builder.createXmlMapper(false).build();
-//        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-//        return objectMapper;
-//    }
-
-//    @Bean
-//    @ConditionalOnBean(ObjectMapper.class)
-//    public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter(ObjectMapper objectMapper) {
-//        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-//        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-//        converter.setObjectMapper(objectMapper);
-//        return converter;
-//    }
 
     //解决中文返回浏览器乱码
     @Override
@@ -112,49 +105,49 @@ public class WebMvcConfig implements WebMvcConfigurer{
      * @param webMvcProperties
      * @return
      */
-//    @Bean
-//    public ViewResolver viewResolver(@Autowired WebMvcProperties webMvcProperties) {
-//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-//        resolver.setPrefix(webMvcProperties.getView().getPrefix());
-//        resolver.setSuffix(webMvcProperties.getView().getSuffix());
-//        resolver.setViewClass(JstlView.class);
-//        resolver.setViewNames("*");
-//        resolver.setOrder(2);
-//        return resolver;
-//    }
-//
-//    @Bean("itemlateR")
-//    public ITemplateResolver templateResolver(@Autowired ThymeleafProperties thymeleafProperties) {
-//        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-//        templateResolver.setTemplateMode(thymeleafProperties.getMode());
-//        templateResolver.setPrefix(thymeleafProperties.getPrefix());
-//        templateResolver.setSuffix(thymeleafProperties.getSuffix());
-//        templateResolver.setCharacterEncoding(thymeleafProperties.getEncoding().name());
-//        templateResolver.setCacheable(thymeleafProperties.isCache());
-//        return templateResolver;
-//    }
-//
-//    @Bean
-//    public SpringTemplateEngine templateEngine(@Qualifier("itemlateR") ITemplateResolver iTemplateResolver) {
-//        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-//        templateEngine.setTemplateResolver(iTemplateResolver);
-//        // templateEngine
-//        return templateEngine;
-//    }
-//
-//    @Bean
-//    public ThymeleafViewResolver viewResolverThymeLeaf(SpringTemplateEngine springTemplateEngine,
-//                                                       @Autowired ThymeleafProperties thymeleafProperties) {
-//        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-//        viewResolver.setTemplateEngine(springTemplateEngine);
-//        viewResolver.setCharacterEncoding(thymeleafProperties.getEncoding().name());
-//        viewResolver.setOrder(1);
-//        viewResolver.setViewNames(new String[]{"thymeleaf/*"});
-//        return viewResolver;
-//    }
-//
-//    @Override
-//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-//        configurer.enable();
-//    }
+    @Bean
+    public ViewResolver viewResolver(@Autowired WebMvcProperties webMvcProperties) {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix(webMvcProperties.getView().getPrefix());
+        resolver.setSuffix(webMvcProperties.getView().getSuffix());
+        resolver.setViewClass(JstlView.class);
+        resolver.setViewNames("*");
+        resolver.setOrder(2);
+        return resolver;
+    }
+
+    @Bean("itemlateR")
+    public ITemplateResolver templateResolver(@Autowired ThymeleafProperties thymeleafProperties) {
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setTemplateMode(thymeleafProperties.getMode());
+        templateResolver.setPrefix(thymeleafProperties.getPrefix());
+        templateResolver.setSuffix(thymeleafProperties.getSuffix());
+        templateResolver.setCharacterEncoding(thymeleafProperties.getEncoding().name());
+        templateResolver.setCacheable(thymeleafProperties.isCache());
+        return templateResolver;
+    }
+
+    @Bean
+    public SpringTemplateEngine templateEngine(@Qualifier("itemlateR") ITemplateResolver iTemplateResolver) {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(iTemplateResolver);
+        // templateEngine
+        return templateEngine;
+    }
+
+    @Bean
+    public ThymeleafViewResolver viewResolverThymeLeaf(SpringTemplateEngine springTemplateEngine,
+                                                       @Autowired ThymeleafProperties thymeleafProperties) {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(springTemplateEngine);
+        viewResolver.setCharacterEncoding(thymeleafProperties.getEncoding().name());
+        viewResolver.setOrder(1);
+        viewResolver.setViewNames(new String[]{"thymeleaf/*"});
+        return viewResolver;
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
 }
