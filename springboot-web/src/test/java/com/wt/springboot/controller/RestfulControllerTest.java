@@ -27,7 +27,8 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes= SpringbootWebApplication.class)
+//启用随机端口
+@SpringBootTest(classes= SpringbootWebApplication.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RestfulControllerTest {
 
     @Autowired

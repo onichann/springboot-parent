@@ -28,11 +28,13 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
-//@EnableConfigurationProperties(ConfigProperties.class)
 public class IndexController  {
 
     private static Log log = LogFactory.getLog(IndexController.class);
@@ -58,15 +60,22 @@ public class IndexController  {
     @Value("#{returnJson.message?.toUpperCase()}")
     private  String message;
 
+
+    @Autowired
+    private ReturnJson returnJson;
+
+    @Autowired
+    private ReturnJson returnJson2;
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @RequestMapping("/login2}")
+    @RequestMapping("/jsplogin}")
     public String login(){
-        return "login2";
+        return "jsplogin";
     }
 
 
@@ -75,7 +84,6 @@ public class IndexController  {
     public String json(HttpServletResponse response){
         response.setHeader("token", IDUtils.getUUID());
         String str=configProperties.getUrl()+"||"+uploadDir+"||"+url+"||"+envConfig.getJAVA_HOME()+"||中文";
-        log.debug(str);
         return str;
     }
 
@@ -88,8 +96,6 @@ public class IndexController  {
     @RequestMapping("/getIp")
     @ResponseBody
     public String getIp(HttpServletRequest request) {
-//        if(1>0) throw new SpringWebException("测试异常");
-        System.out.println("111111111");
         return IPUtil.getIpAddr(request);
     }
 
@@ -126,7 +132,6 @@ public class IndexController  {
     @GetMapping("/printDate")
     @ResponseBody
     public Object printDate(Date date){
-        System.out.println(date);
         return date;
     }
 
@@ -165,5 +170,34 @@ public class IndexController  {
         modelAndView.setView(new MappingJackson2JsonView());
         modelAndView.addObject("user","test我");
         return modelAndView;
+    }
+
+//    @InitBinder
+//    protected  void  initBinder(WebDataBinder binder){
+//        binder.addCustomFormatter(new DateFormatter("yyyy-MM-dd HH:mm:ss"));
+//    }
+
+    @RequestMapping("/test1")
+    public Object test1(@RequestParam("date") Date date, @Autowired  ReturnJson returnJson){
+        Date now= Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("date",date);
+        returnJson.setData(map);
+        return returnJson;
+    }
+
+    @RequestMapping("/test2")
+    public Object test2(@Autowired ReturnJson returnJson){
+        return "200";
+    }
+
+    @RequestMapping(value = "/test3",headers ="version=1.0" )
+    public Object test(ReturnJson returnJson){
+        return "200";
+    }
+
+    @RequestMapping("/index")
+    public ModelAndView index(){
+        return new ModelAndView("/jsp/jsplogin");
     }
 }

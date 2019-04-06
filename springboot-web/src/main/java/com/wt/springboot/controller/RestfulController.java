@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/api/v1.0")
 public class RestfulController {
 
-//    private static Logger logger = LogManager.getLogger(RestfulController.class);
     private static Log logger = LogFactory.getLog(RestfulController.class);
 
     @Autowired

@@ -1,7 +1,6 @@
-package com.wt.springboot.config;
+package com.wt.springboot.redis;
 
 
-import com.wt.springboot.redis.MyRedisChannelListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

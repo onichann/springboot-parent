@@ -1,7 +1,6 @@
-package com.wt.springboot.service.Impl;
+package com.wt.springboot.security;
 
 
-import com.wt.springboot.dao.UserRepository;
 import com.wt.springboot.mybatis.mapper.UserMapper;
 import com.wt.springboot.pojo.FKRole;
 import com.wt.springboot.pojo.FKUser;

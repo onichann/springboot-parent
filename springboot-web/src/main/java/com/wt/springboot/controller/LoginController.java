@@ -13,14 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LoginController {
+
     private Log log= LogFactory.getLog(LoginController.class);
 
-//    @PostMapping("/login")
-//    public String login(@RequestParam("username") String username,
-//                        @RequestParam("password") String password){
-//        log.debug("username:"+username+",password:"+password);
-//        return "home";
-//    }
     @RequestMapping("/webLogout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

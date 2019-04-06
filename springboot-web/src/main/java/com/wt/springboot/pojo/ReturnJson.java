@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 @Component("returnJson")
 //@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-//@Builder
 public class ReturnJson implements Serializable {
     private static final long serialVersionUID = -3049433887514970612L;
     private boolean success;
