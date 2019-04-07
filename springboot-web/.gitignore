@@ -1,6 +1,7 @@
 HELP.md
 /target/
 /out/
+/log/
 my.*
 .mvn
 mvnw

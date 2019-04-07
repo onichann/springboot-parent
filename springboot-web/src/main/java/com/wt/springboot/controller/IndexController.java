@@ -60,6 +60,11 @@ public class IndexController  {
     @Value("#{returnJson.message?.toUpperCase()}")
     private  String message;
 
+    @Value("${java.home}")
+    private String javahome;
+
+    @Value("#{'${basedir}'}")
+    private String basedir;
 
     @Autowired
     private ReturnJson returnJson;
