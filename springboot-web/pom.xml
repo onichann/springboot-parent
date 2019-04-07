@@ -266,7 +266,7 @@
 
 	<build>
 		<!--编译后包名-->
-		<finalName>${name}-${version}</finalName>
+		<finalName>${project.name}-${project.version}</finalName>
 
 		<!--<filters>-->
 			<!--<filter>src/main/resources/config/config.properties</filter>-->
