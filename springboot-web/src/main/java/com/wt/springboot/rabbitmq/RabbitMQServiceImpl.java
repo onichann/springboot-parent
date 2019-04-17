@@ -3,8 +3,8 @@ package com.wt.springboot.rabbitmq;
 import com.alibaba.fastjson.JSON;
 import com.wt.springboot.common.IDUtils;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
