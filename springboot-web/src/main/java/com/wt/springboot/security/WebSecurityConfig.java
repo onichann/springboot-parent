@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        super.configure(http);
+//        super.configure(http)
 
         //控制页面是否可以在iframe里显示
         http.headers().frameOptions().disable();
