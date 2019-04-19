@@ -1,0 +1,5 @@
+客户端模式：
+http://localhost:8080/oauth/token?grant_type=client_credentials&scope=select&client_id=client_1&client_secret=123456
+
+访问受保护资源
+http://localhost:8080/order/1?access_token=e4c3edc1-ad2e-46c5-9791-3e5459fc5f3c
