@@ -29,9 +29,12 @@ public class AuthorizationServerConfiguration  implements AuthorizationServerCon
 
 //    用来配置令牌端点(Token Endpoint)的安全约束.
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer authorizationServerSecurityConfigurer) throws Exception {
+    public void configure(AuthorizationServerSecurityConfigurer authorizationServer) throws Exception {
 //            允许表单验证
-            authorizationServerSecurityConfigurer.allowFormAuthenticationForClients();
+            authorizationServer
+                    .tokenKeyAccess("permitAll()")
+                    .checkTokenAccess("isAuthenticated()")//allow check token
+                    .allowFormAuthenticationForClients();
     }
 
 //    用来配置客户端详情服务（ClientDetailsService），客户端详情信息在这里进行初始化，你能够把客户端详情信息写死在这里或者是通过数据库来存储调取详情信息。

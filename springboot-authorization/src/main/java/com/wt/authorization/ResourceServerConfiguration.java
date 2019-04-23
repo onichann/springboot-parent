@@ -25,6 +25,7 @@ public class ResourceServerConfiguration implements ResourceServerConfigurer {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        http.httpBasic().disable();
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()

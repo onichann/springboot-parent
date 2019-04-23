@@ -3,3 +3,12 @@ http://localhost:8080/oauth/token?grant_type=client_credentials&scope=select&cli
 
 访问受保护资源
 http://localhost:8080/order/1?access_token=e4c3edc1-ad2e-46c5-9791-3e5459fc5f3c
+
+
+密码模式：
+http://localhost:8080/oauth/token?username=admin&password=admin&grant_type=password&scope=select&client_id=client_2&client_secret=123456
+
+
+检测token
+
+http://localhost:8080/oauth/check_token?token=ad8bd19a-b736-45ed-839d-f002db190b01
