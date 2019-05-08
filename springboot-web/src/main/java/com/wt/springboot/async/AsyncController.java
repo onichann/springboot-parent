@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.net.URLDecoder;
 import java.util.concurrent.*;
 
 @Controller
@@ -57,6 +58,7 @@ public class AsyncController {
     }
 
     public static void main(String[] args) throws  Exception{
-        new AsyncController().page2();
+       // new AsyncController().page2();
+        System.out.println(URLDecoder.decode("%E5%9C%B0%E5%9D%97%E5%90%8D%E7%A7%B0","UTF-8"));
     }
 }
