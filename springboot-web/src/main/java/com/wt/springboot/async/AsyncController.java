@@ -47,6 +47,13 @@ public class AsyncController {
         System.out.println("submit="+executorCompletionService.take().get());
         //关闭
         executorService.shutdown();
+        try {
+            if (!executorService.awaitTermination(2000, TimeUnit.MILLISECONDS)) {
+                executorService.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            executorService.shutdownNow();
+        }
     }
 
     public static void main(String[] args) throws  Exception{
