@@ -15,8 +15,8 @@ public class ExecutorDemo {
 
     public static void scheduledTreadPool(){
         ScheduledExecutorService pool = Executors.newScheduledThreadPool(3);
-        pool.schedule(() -> System.out.println("延迟3s"), 3, TimeUnit.SECONDS);
-        pool.scheduleAtFixedRate(() -> System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))+" 延迟3s"), 1,3, TimeUnit.SECONDS);
+        pool.schedule(() -> System.out.println("延迟3s调用"), 3, TimeUnit.SECONDS);
+        pool.scheduleAtFixedRate(() -> System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))+" 定时每3s调用"), 1,3, TimeUnit.SECONDS);
         //pool.shutdown();
 
     }

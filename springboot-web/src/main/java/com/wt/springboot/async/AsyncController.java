@@ -59,6 +59,6 @@ public class AsyncController {
 
     public static void main(String[] args) throws  Exception{
        // new AsyncController().page2();
-        System.out.println(URLDecoder.decode("%E5%9C%B0%E5%9D%97%E5%90%8D%E7%A7%B0","UTF-8"));
+        System.out.println(URLDecoder.decode("tbbh=S2019050600001&ajly=&bsqd=%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%B8%8A%E6%8A%A5&szq=19&szz=19516&ytbmj=96825.86&zdmj=96825.86&sbr=%E8%AE%B8%E4%BF%8A&cjsj=2018-01-23&xsqk=&distance=111","UTF-8"));
     }
 }
