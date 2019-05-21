@@ -81,6 +81,8 @@
 		<hutool.all.version>4.1.19</hutool.all.version>
 		<reflections.version>0.9.11</reflections.version>
 		<poi.version>3.17</poi.version>
+		<commons-lang3.version>3.9</commons-lang3.version>
+
 	</properties>
 
 	<dependencyManagement>
@@ -126,6 +128,13 @@
 				<groupId>commons-collections</groupId>
 				<artifactId>commons-collections</artifactId>
 				<version>${commons-collections.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
 			</dependency>
 
 			<!--httpclient-->
