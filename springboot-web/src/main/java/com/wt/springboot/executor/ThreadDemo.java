@@ -7,6 +7,8 @@ package com.wt.springboot.executor;
  */
 public class ThreadDemo extends Thread {
 
+    private transient String name;
+
     public ThreadDemo(Runnable target) {
         super(target);
     }
