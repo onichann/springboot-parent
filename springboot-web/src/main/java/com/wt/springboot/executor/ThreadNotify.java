@@ -90,6 +90,7 @@ public class ThreadNotify {
         executorService.submit(new ThreadNotify().new B());
         executorService.submit(new ThreadNotify().new A());
         executorService.shutdown();
+//        https://blog.csdn.net/u011514810/article/details/77131296
     }
 
 }
