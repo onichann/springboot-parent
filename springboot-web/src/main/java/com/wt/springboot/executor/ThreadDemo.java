@@ -20,7 +20,7 @@ public class ThreadDemo extends Thread {
 
             }
         });
-        threadDemo.setDaemon(true);
+        threadDemo.setDaemon(true);//设置为守护线程
         threadDemo.start();
     }
 }
