@@ -82,7 +82,7 @@
 		<reflections.version>0.9.11</reflections.version>
 		<poi.version>3.17</poi.version>
 		<commons-lang3.version>3.9</commons-lang3.version>
-
+		<guava.version>27.1-jre</guava.version>
 	</properties>
 
 	<dependencyManagement>
@@ -215,6 +215,12 @@
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi-ooxml</artifactId>
 				<version>${poi.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
 			</dependency>
 
 		</dependencies>
