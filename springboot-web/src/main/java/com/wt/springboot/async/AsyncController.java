@@ -43,7 +43,7 @@ public class AsyncController {
         System.out.println("submit="+stringFutureTask.get());
         System.out.println(stringFutureTask.isDone()+"-------------------");
         //3
-        ExecutorCompletionService executorCompletionService = new ExecutorCompletionService(executorService);
+        ExecutorCompletionService<String> executorCompletionService = new ExecutorCompletionService<>(executorService);
         executorCompletionService.submit(() -> "yes2");
         System.out.println("submit="+executorCompletionService.take().get());
         //关闭
