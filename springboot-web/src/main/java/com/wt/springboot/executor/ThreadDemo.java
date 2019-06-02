@@ -1,5 +1,9 @@
 package com.wt.springboot.executor;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
 /**
  * @author Administrator
  * @date 2019-05-20 上午 11:21
@@ -17,10 +21,20 @@ public class ThreadDemo extends Thread {
         ThreadDemo threadDemo = new ThreadDemo(new Runnable(){
             @Override
             public void run() {
+                BigDecimal bigDecimal = new BigDecimal("20191400257173");
+
+                try {
+                    Number parse = DecimalFormat.getNumberInstance().parse("20191400257173");
+                    System.out.println(parse.doubleValue());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long lL = Long.parseLong("20191400257173");
+                System.out.println(lL);
 
             }
         });
-        threadDemo.setDaemon(true);//设置为守护线程
+        //threadDemo.setDaemon(true);//设置为守护线程
         threadDemo.start();
     }
 }
