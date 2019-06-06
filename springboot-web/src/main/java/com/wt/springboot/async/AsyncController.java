@@ -66,6 +66,5 @@ public class AsyncController {
         List<Integer> integers = Arrays.asList(1, 2, 3, 4);
         integers.sort(Ordering.natural().reversed());
         System.out.println(integers);
-
     }
 }
