@@ -83,6 +83,7 @@
 		<poi.version>3.17</poi.version>
 		<commons-lang3.version>3.9</commons-lang3.version>
 		<guava.version>27.1-jre</guava.version>
+		<mybatisPlus.version>3.0.7.1</mybatisPlus.version>
 	</properties>
 
 	<dependencyManagement>
@@ -221,6 +222,12 @@
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>${guava.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatisPlus.version}</version>
 			</dependency>
 
 		</dependencies>
