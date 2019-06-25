@@ -14,7 +14,6 @@ import javax.servlet.annotation.WebListener;
  * PROJECT_NAME sand-demo
  */
 @WebListener
-//@Service
 public class WebContextListener implements ServletContextListener {
 
     private static final Log logger = LogFactory.getLog(WebContextListener.class);

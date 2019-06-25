@@ -10,7 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @date 2019-04-02 上午 9:08
  * PROJECT_NAME sand-demo
  */
-public class SpringApplicationListener implements ApplicationListener<ApplicationPreparedEvent> {
+public class ApplicationPreparedEventListener implements ApplicationListener<ApplicationPreparedEvent> {
 
     @Override
     public void onApplicationEvent(ApplicationPreparedEvent applicationPreparedEvent) {
