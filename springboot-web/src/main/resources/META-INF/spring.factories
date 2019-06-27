@@ -4,6 +4,8 @@ com.wt.springboot.web.listener.ApplicationStartingListener,\
 com.wt.springboot.web.listener.ApplicationEnvironmentPreparedListener,\
 com.wt.springboot.web.listener.ApplicationPreparedEventListener,\
 com.wt.springboot.web.listener.ApplicationStartedListener,\
-com.wt.springboot.web.listener.ApplicationReadyListener  
+com.wt.springboot.web.listener.ApplicationReadyListener,\
+com.wt.springboot.web.listener.ContextClosedListener,\
+com.wt.springboot.web.listener.ContextRefreshedListener
   
 
