@@ -2,7 +2,7 @@ package com.wt.springboot.web.listener;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextClosedEvent;
+import org.springframework.context.event.ContextRefreshedEvent;
 
 /**
  * @author Administrator
@@ -13,9 +13,9 @@ import org.springframework.context.event.ContextClosedEvent;
 /**
  * 容器启动后
  */
-public class ContextRefreshedListener implements ApplicationListener<ContextClosedEvent> {
+public class ContextRefreshedListener implements ApplicationListener<ContextRefreshedEvent> {
     @Override
-    public void onApplicationEvent(ContextClosedEvent contextClosedEvent) {
-        ApplicationContext applicationContext = contextClosedEvent.getApplicationContext();
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        ApplicationContext applicationContext = contextRefreshedEvent.getApplicationContext();
     }
 }
