@@ -3,7 +3,7 @@
 <mapper namespace="com.wt.springboot.mybatis.mapper.UserXmlMapper">
 
 	<select id="queryUsers"  resultType="com.wt.springboot.pojo.User_Mybatis">
-		select * from tb_user_m
+		select * from tb_user
 	</select>
 
 </mapper>
