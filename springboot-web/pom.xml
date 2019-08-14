@@ -283,6 +283,11 @@
 			<!--<artifactId>mybatis-plus-boot-starter</artifactId>-->
 		<!--</dependency>-->
 
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
