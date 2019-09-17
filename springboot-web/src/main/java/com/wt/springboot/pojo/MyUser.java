@@ -6,7 +6,7 @@ package com.wt.springboot.pojo;
  * PROJECT_NAME springboot-parent
  */
 public class MyUser {
-    private int id;
+    private Integer id;
     private String loginName;
     private String password;
     private String userName;

@@ -1,6 +1,7 @@
 package com.wt.springboot.pojo;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public class SealData {
     private String businessCode;
     private String departmentCode;
     private String fileName;
+
+//    @NestedConfigurationProperty
     private List<SealDataListBean> sealDataList;
 
     public String getSourceId() {
