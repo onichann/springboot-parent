@@ -37,26 +37,26 @@
 		</developer>
 	</developers>
 
-	<repositories>
-		<repository>
-			<id>GISINFO</id>
-			<name>GISINFO</name>
-			<url>
-				http://116.228.152.154:20912/repository/maven-public/
-			</url>
-			<releases>
-				<updatePolicy>daily</updatePolicy>
-				<!--  never,always,interval n  -->
-				<enabled>true</enabled>
-				<checksumPolicy>warn</checksumPolicy>
-				<!--  fail,ignore  -->
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<layout>default</layout>
-		</repository>
-	</repositories>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>GISINFO</id>-->
+<!--			<name>GISINFO</name>-->
+<!--			<url>-->
+<!--				http://116.228.152.154:20912/repository/maven-public/-->
+<!--			</url>-->
+<!--			<releases>-->
+<!--				<updatePolicy>daily</updatePolicy>-->
+<!--				&lt;!&ndash;  never,always,interval n  &ndash;&gt;-->
+<!--				<enabled>true</enabled>-->
+<!--				<checksumPolicy>warn</checksumPolicy>-->
+<!--				&lt;!&ndash;  fail,ignore  &ndash;&gt;-->
+<!--			</releases>-->
+<!--			<snapshots>-->
+<!--				<enabled>false</enabled>-->
+<!--			</snapshots>-->
+<!--			<layout>default</layout>-->
+<!--		</repository>-->
+<!--	</repositories>-->
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>

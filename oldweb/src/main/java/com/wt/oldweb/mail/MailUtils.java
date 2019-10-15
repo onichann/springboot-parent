@@ -9,14 +9,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-
-/** 
- * Java Mail ?????? 
- *  
- * @author XueQi 
- * @version 1.0 
- *  
- */  
 public class MailUtils {  
     private static String host;  
     private static String username;  
@@ -32,23 +24,22 @@ public class MailUtils {
             password = "wt520520";  
             from = "wt01278@163.com";  
             nick = "admin";  
-            // nick + from ????????????????  
-        } catch (Exception e) {  
+        } catch (Exception e) {
             e.printStackTrace();  
         }  
     }  
   
     /** 
-     * ??????? 
+     *  
      *  
      * @param to 
-     *            ??????????","??? 
+     *
      * @param subject 
-     *            ???? 
+     *             
      * @param body 
-     *            ???? 
+     *             
      * @param filepath 
-     *            ???????,?????????null 
+     *
      * @return 
      * @throws MessagingException 
      * @throws AddressException 
@@ -57,28 +48,24 @@ public class MailUtils {
     public static boolean sendMail(String to, String subject, String body,  
             List<String> filepath) throws AddressException, MessagingException,  
             UnsupportedEncodingException {  
-        // ????????  
+
         if (body == null) {  
             body = "";  
         }  
         if (subject == null) {  
-            subject = "??????";  
+            subject = "";  
         }  
-        // ????Properties????  
+        // Properties  
         Properties props = System.getProperties();  
-        // ?????????????  
-        props.put("mail.smtp.host", host);  
-        props.put("mail.smtp.auth", "true"); // ??????  
-        // ?????????????  
-        Session session = Session.getDefaultInstance(props, null);  
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.auth", "true");
+        Session session = Session.getDefaultInstance(props, null);
         //Session session = Session.getInstance(props, null);
-        // ????????????????????????????????  
-        MimeMessage msg = new MimeMessage(session);  
+        MimeMessage msg = new MimeMessage(session);
         nick = MimeUtility.encodeText(nick);  
         //msg.setFrom(new InternetAddress(nick + "<" + from + ">"));  
-        msg.setFrom(new InternetAddress(from,"????111","UTF-8"));  
-        // ????????????  
-        if (to != null && to.trim().length() > 0) {  
+        msg.setFrom(new InternetAddress(from,"111","UTF-8"));  
+        if (to != null && to.trim().length() > 0) {
             String[] arr = to.split(",");  
             int receiverCount = arr.length;  
             if (receiverCount > 0) {  
@@ -88,36 +75,30 @@ public class MailUtils {
                 }  
                 msg.addRecipients(Message.RecipientType.TO, address);  
                 msg.setSubject(subject);  
-                // ?????BodyPart???????????????Multipart??  
+                // BodyPartMultipart  
                 Multipart mp = new MimeMultipart();  
-                // ????????  
-                if (filepath != null && filepath.size() > 0) {  
+                if (filepath != null && filepath.size() > 0) {
                     for (String filename : filepath) {  
                         MimeBodyPart mbp = new MimeBodyPart();  
-                        // ???????  
-                        FileDataSource fds = new FileDataSource(filename);  
-                        // ???????????????BodyPart  
+                        FileDataSource fds = new FileDataSource(filename);
+                        // BodyPart  
                         mbp.setDataHandler(new DataHandler(fds));  
-                        // ???????????????BodyPart  
+                        // BodyPart  
                         mbp.setFileName(fds.getName());  
                         mp.addBodyPart(mbp);  
                     }  
                     MimeBodyPart mbp = new MimeBodyPart();  
                     mbp.setText(body);  
                     mp.addBodyPart(mbp);  
-                    // ?????????????????  
-                    filepath.clear();  
-                    // Multipart???????  
+                    filepath.clear();
+                    // Multipart  
                     msg.setContent(mp);  
                 } else {  
-                    // ???????????  
-                    msg.setText(body);  
+                    msg.setText(body);
                 }  
-                // ?????????????????  
-                msg.setSentDate(new Date());  
+                msg.setSentDate(new Date());
                 msg.saveChanges();  
-                // ???????  
-                Transport transport = session.getTransport("smtp");  
+                Transport transport = session.getTransport("smtp");
                 transport.connect(host, username, password);  
                 transport.sendMessage(msg,  
                         msg.getRecipients(Message.RecipientType.TO));  
@@ -133,24 +114,13 @@ public class MailUtils {
         }  
     }  
   
-    public static void main(String[] args) throws AddressException,  
-            UnsupportedEncodingException, MessagingException {  
+    public static void main(String[] args) throws UnsupportedEncodingException, MessagingException {
         List<String> filepath = new ArrayList<>();  
         //filepath.add("E:\\1.jpg");  
-        filepath.add("E:\\apache-tomcat-8.5.32\\RUNNING.txt");
-        new Thread(() -> {
-            for(int i=0;i<10000;i++){
-                try {
-                    sendMail("77794334@qq.com", "撤！！！", "邮件内容：下班把",
-                            filepath);
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-            }
+//        filepath.add("E:\\apache-tomcat-8.5.32\\RUNNING.txt");
+        sendMail("592009146@qq.com", "撤！！！", "邮件内容：下班把",
+                filepath);
 
-        }).start();
 
     }  
 }  

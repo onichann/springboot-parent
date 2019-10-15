@@ -4,17 +4,14 @@ import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
-import org.springframework.beans.factory.annotation.Value;
-
 import javax.xml.namespace.QName;
 import java.net.URL;
 
-@org.springframework.stereotype.Service("sms")
+
 public class Sms {
 
-    @Value("http://111.1.15.158/webservice/services/sendmsg")
+
     private String url;
-    @Value("http://DefaultNamespace")
     private String targetNamespace;
 
     private  String CallWsdl(String method,String[] parameter,Object[]...values) throws Exception {

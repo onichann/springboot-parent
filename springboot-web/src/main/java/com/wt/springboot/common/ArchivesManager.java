@@ -1,16 +1,15 @@
 package com.wt.springboot.common;
 
-import com.gisinfo.platform.framework.core.web.GlobalCacheManager;
-import com.gisinfo.platform.framework.core.web.struts2.action.ExecuterManager;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.*;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -19,10 +18,11 @@ import java.io.InputStream;
 
 public class ArchivesManager {
 
-    public static final Logger log = Logger.getLogger(ArchivesManager.class);
+    private static final Log logger = LogFactory.getLog(ArchivesManager.class);
+
     private static String iP;
     static {
-             iP= GlobalCacheManager.getSettingManager().getSetting("ArchiveSystemIp","iP");
+        iP = "";
     }
 
     public String callArchive(String acname,String field,String value) throws IOException {
@@ -41,7 +41,7 @@ public class ArchivesManager {
 
     }
 
-    public String callArchiveFile(String id) {
+    public String callArchiveFile(String id,HttpServletResponse response) {
         String url="http://"+iP+":8080/rams/systemAction!getArchiveFile.action";
         String result="";
         try {
@@ -61,32 +61,31 @@ public class ArchivesManager {
                             if (statusLine.getStatusCode() == 200) {
                                 Header header = httpResponse.getHeaders(HttpHeaders.CONTENT_TYPE)[0];
                                 if (header.getValue().contains(ContentType.APPLICATION_JSON.getMimeType())) {
-                                    log.info("获取档案流出错:" + EntityUtils.toString(httpResponse.getEntity()));
+                                    logger.info("获取档案流出错:" + EntityUtils.toString(httpResponse.getEntity()));
                                     return EntityUtils.toString(httpResponse.getEntity());
                                 }
                                 ServletOutputStream outputStream = null;
                                 InputStream inputStream = null;
                                 try {
-                                    HttpServletResponse response = ExecuterManager.httpExecuter().getResponse();
                                     response.setContentType("application/pdf");
                                     outputStream = response.getOutputStream();
                                     inputStream = httpResponse.getEntity().getContent();
                                     IOUtils.write(IOUtils.toByteArray(inputStream), outputStream);
                                 } catch (IOException e) {
-                                    log.info(e.getMessage());
+                                    logger.info(e.getMessage());
                                 } finally {
                                     IOUtils.closeQuietly(inputStream);
                                     IOUtils.closeQuietly(outputStream);
                                 }
                             } else {
-                                log.info("code:" + statusLine.getStatusCode());
+                                logger.info("code:" + statusLine.getStatusCode());
                             }
                             EntityUtils.consume(entity);
                             return null;
                         }
                     });
         } catch (IOException e) {
-            log.info(e.getMessage());
+            logger.info(e.getMessage());
         }
         return result;
     }
