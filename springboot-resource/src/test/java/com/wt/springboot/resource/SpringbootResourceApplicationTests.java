@@ -1,4 +1,4 @@
-package com.wt.resource;
+package com.wt.springboot.resource;
 
 
 import org.junit.Test;
