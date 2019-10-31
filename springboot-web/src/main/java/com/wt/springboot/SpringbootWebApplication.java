@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Repository;
 
 //@SpringBootApplication(exclude = {RedisAutoConfiguration.class})
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Repository;
 		//markerInterface = Class.class, //通过继承某个接口限制扫描，不常用
 		annotationClass = Repository.class
 )
+//允许获取代理对象 AopContext.currentProxy()
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class SpringbootWebApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

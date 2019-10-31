@@ -1,4 +1,5 @@
-package com.wt.resource;
+package com.wt.springboot.resource;
+
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
