@@ -11,8 +11,8 @@
 		<module>springboot-web</module>
 		<module>springboot-excel</module>
 		<module>springboot-authorization</module>
-		<module>oldweb</module>
 		<module>springboot-resource</module>
+		<module>oldweb</module>
     </modules>
 
 	<groupId>com.wt</groupId>
