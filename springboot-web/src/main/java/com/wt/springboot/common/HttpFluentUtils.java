@@ -14,6 +14,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -39,15 +40,9 @@ public class HttpFluentUtils {
     private <T> T get(String uri,Class<T> returnType,Map<String,String> uriParams,String hostName, Integer port, String schemeName) throws IOException {
         uri=buildGetParam(uri,uriParams);
         Request request = Request.Get(uri);
-        request=buildProxy(request,hostName,port,schemeName);
+        buildProxy(request, hostName, port, schemeName);
         String content=request.execute().returnContent().asString(Consts.UTF_8);
-        Gson gson=new Gson();
-        if(returnType!=null){
-//            return gson.fromJson(content, returnType);
-            return JSON.parseObject(content,returnType);
-        }
-//        return gson.fromJson(content, (Type) String.class);
-        return JSON.parseObject(content, (Type) String.class);
+        return JSON.parseObject(content,returnType);
     }
 
     private String buildGetParam(String uri,Map<String,String> uriParams){
@@ -62,7 +57,7 @@ public class HttpFluentUtils {
         return uri;
     }
 
-    private Request buildProxy(Request request, String hostName, Integer port, String schemeName) {
+    private void buildProxy(Request request, String hostName, Integer port, String schemeName) {
         if(!StringUtils.isEmpty(hostName) && port != null) {
             //设置代理
             if (StringUtils.isEmpty(schemeName)) {
@@ -70,30 +65,29 @@ public class HttpFluentUtils {
             }
             request.viaProxy(new HttpHost(hostName, port, schemeName));
         }
-        return request;
     }
 
 
     public <T> T postForObject(String uri,Class<T> returnType,Map<String,String> uriParams,String hostName, Integer port, String schemeName,List<File> files) throws Exception {
-        List<NameValuePair> nameValuePairs=null;
-        if(MapUtils.isNotEmpty(uriParams)){
-            nameValuePairs= new ArrayList<>(uriParams.size());
-            for (String key : uriParams.keySet()) {
-                nameValuePairs.add(new BasicNameValuePair(key, uriParams.get(key)));
-            }
-        }
+        List<NameValuePair> nameValuePairs = getNameValuePairs(uriParams);
         return post(uri,hostName,port,schemeName,nameValuePairs,returnType,files);
     }
 
     public <T> T postForObject(String uri,Class<T> returnType,Map<String,String> uriParams,List<File> files) throws Exception {
-        List<NameValuePair> nameValuePairs=null;
-        if(MapUtils.isNotEmpty(uriParams)){
-            nameValuePairs= new ArrayList<>(uriParams.size());
+        List<NameValuePair> nameValuePairs = getNameValuePairs(uriParams);
+        return post(uri,null,null,null,nameValuePairs,returnType,files);
+    }
+
+    @Nullable
+    private List<NameValuePair> getNameValuePairs(Map<String, String> uriParams) {
+        List<NameValuePair> nameValuePairs = null;
+        if (MapUtils.isNotEmpty(uriParams)) {
+            nameValuePairs = new ArrayList<>(uriParams.size());
             for (String key : uriParams.keySet()) {
                 nameValuePairs.add(new BasicNameValuePair(key, uriParams.get(key)));
             }
         }
-        return post(uri,null,null,null,nameValuePairs,returnType,files);
+        return nameValuePairs;
     }
 
 
@@ -101,7 +95,7 @@ public class HttpFluentUtils {
         Assert.notNull(url,"URL不能为空");
         HttpEntity entity = buildPostParam(nameValuePairs, files);
         Request request = Request.Post(url).body(entity);
-        request = buildProxy(request, hostName, port, schemeName);
+        buildProxy(request, hostName, port, schemeName);
         String content= request.execute().returnContent().asString(Consts.UTF_8);
         Gson gson=new Gson();
         if(returnType!=null){

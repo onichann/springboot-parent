@@ -118,7 +118,7 @@ public class MailUtils {
         List<String> filepath = new ArrayList<>();  
         //filepath.add("E:\\1.jpg");  
 //        filepath.add("E:\\apache-tomcat-8.5.32\\RUNNING.txt");
-        sendMail("545763026@qq.com", "嘿嘿，你一定猜不到我能用这种姿势划水！！！", "邮件内容：要来一起游泳吗？",
+        sendMail("941349177@qq.com", "嘿嘿，你一定猜不到我能用这种姿势划水！！！", "邮件内容：要来一起游泳吗？",
                 filepath);
 
 

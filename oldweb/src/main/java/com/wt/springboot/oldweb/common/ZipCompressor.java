@@ -9,12 +9,6 @@ import java.util.zip.CheckedOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-
-/**
- * 
- * @author wut
- *
- */
 public class ZipCompressor {
 	
 static final int BUFFER = 8192;     

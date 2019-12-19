@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:config/config.properties")
+@PropertySource("classpath:config.properties")
 @ConfigurationProperties(prefix = "test", ignoreUnknownFields = false)
 @Profile({"dev","test"})
 public class PropConfig {

@@ -33,5 +33,7 @@ public class FilterTest {
                 Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Person::getId))),
                         ArrayList::new));
         System.out.println(unique);
+        List<Person> collect = new ArrayList<>(persons.stream().collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Person::getId)))));
+        System.out.println(collect);
     }
 }

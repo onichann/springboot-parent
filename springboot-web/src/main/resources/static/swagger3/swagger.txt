@@ -1,2 +1,0 @@
-//in    query  url ?参数   , path url路径参数 , body, header , formData ,   file类型要加 type：file
-//固定2.0 Swagger规范2.0

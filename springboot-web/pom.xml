@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<parent>
 		<groupId>com.wt</groupId>
 		<artifactId>springboot-parent</artifactId>
@@ -12,7 +11,7 @@
 	<artifactId>springboot-web</artifactId>
 	<packaging>jar</packaging>
 	<name>springboot-web</name>
-	<description>Demo project for Spring Boot</description>
+	<description>今生无悔入东方 来世愿生幻想乡</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -21,16 +20,11 @@
 	<dependencies>
 
 		<!--All Starter-->
-
 		<!--添加 spring-boot-starter-web 模块依赖-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions><!-- 去掉默认配置 -->
-				<!--<exclusion>-->
-				<!--<groupId>org.springframework.boot</groupId>-->
-				<!--<artifactId>spring-boot-starter-logging</artifactId>-->
-				<!--</exclusion>-->
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -102,16 +96,16 @@
 		</dependency>
 
 		<!--springboot Session 放入Redis-->
-		<dependency>
-			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session-data-redis</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.session</groupId>-->
+<!--			<artifactId>spring-session-data-redis</artifactId>-->
+<!--		</dependency>-->
 
 		<!--全文检索-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
+<!--		</dependency>-->
 
 		<!--rabbitMQ-->
 		<dependency>
@@ -119,21 +113,8 @@
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
 
-		<!--log4j2-->
-		<!--<dependency>-->
-		<!--<groupId>org.springframework.boot</groupId>-->
-		<!--<artifactId>spring-boot-starter-log4j2</artifactId>-->
-		<!--</dependency>-->
-
-		<!--<dependency>-->
-		<!--<groupId>org.springframework.security.oauth</groupId>-->
-		<!--<artifactId>spring-security-oauth2</artifactId>-->
-		<!--<version>2.3.3.RELEASE</version>-->
-		<!--</dependency>-->
-
 		<!--All Starter-->
 
-		<!--spring boot1.5以上版本@ConfigurationProperties取消location注解-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -143,27 +124,6 @@
 		<dependency>
 			<groupId>org.springframework.hateoas</groupId>
 			<artifactId>spring-hateoas</artifactId>
-		</dependency>
-
-
-		<!--添加JSTL-->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
-
-		<!--添加Servlet依赖-->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<!--<scope>provided</scope>-->
-		</dependency>
-
-		<!--Jasper是tomcat中使用的jsp引擎，运用tomcat-embed-jasper 可以将项目与Tomcat分开-->
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<!--<scope>provided</scope>-->
 		</dependency>
 
 		<!--Apache Commons FileUpload组件依赖-->
@@ -204,7 +164,6 @@
 			<artifactId>fluent-hc</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
@@ -216,7 +175,6 @@
 			<artifactId>commons-collections</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
@@ -234,13 +192,11 @@
 			<artifactId>jai-imageio-core</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.google.zxing/core  二维码-->
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>core</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils java内省 -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
@@ -260,12 +216,6 @@
 		<dependency>
 			<groupId>org.reflections</groupId>
 			<artifactId>reflections</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>javassist</artifactId>
-					<groupId>org.javassist</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -278,14 +228,14 @@
 			<artifactId>guava</artifactId>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>com.baomidou</groupId>-->
-<!--			<artifactId>mybatis-plus-boot-starter</artifactId>-->
-<!--		</dependency>-->
-
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itextpdf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jetbrains</groupId>
+			<artifactId>annotations</artifactId>
 		</dependency>
 
 	</dependencies>
@@ -294,16 +244,11 @@
 		<!--编译后包名-->
 		<finalName>${project.name}-${project.version}</finalName>
 
-		<!--<filters>-->
-			<!--<filter>src/main/resources/config/config.properties</filter>-->
-		<!--</filters>-->
-
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
 				<includes>
 					<include>**/*.xml</include>
-					<include>**/*.ftl</include>
 				</includes>
 			</resource>
 
@@ -312,7 +257,6 @@
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 			</resource>
-
 
 		</resources>
 

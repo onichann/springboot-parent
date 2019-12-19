@@ -1,8 +1,7 @@
-package com.wt.springboot.oldweb.common;
+package com.wt.springboot;
 
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Administrator
@@ -10,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
  * PROJECT_NAME webProject
  */
 public class SomeTest {
-    @NotNull String foo(int x, @Nullable String data){
+    @NotNull String foo(int x, @NotNull String data){
        return x > 0 ? data : "";
    }
 }
