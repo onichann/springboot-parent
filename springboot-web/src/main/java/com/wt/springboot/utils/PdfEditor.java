@@ -1,4 +1,4 @@
-package com.wt.springboot.common;
+package com.wt.springboot.utils;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;

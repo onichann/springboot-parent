@@ -1,4 +1,4 @@
-package com.wt.springboot.common; /**
+package com.wt.springboot.utils; /**
  * @(#)extrairJPEGinTIFF.java
  *
  * 旧tif Decoding of old style JPEG-in-TIFF data is not supported.问题

@@ -1,4 +1,4 @@
-package com.wt.springboot.common.barcode;
+package com.wt.springboot.utils.barcode;
 
 
 import com.google.zxing.LuminanceSource;

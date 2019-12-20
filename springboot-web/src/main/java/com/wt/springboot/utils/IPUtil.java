@@ -1,4 +1,4 @@
-package com.wt.springboot.common;
+package com.wt.springboot.utils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;

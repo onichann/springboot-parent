@@ -1,4 +1,4 @@
-package com.wt.springboot.common;
+package com.wt.springboot.utils;
 
 import com.google.gson.Gson;
 import org.junit.Test;

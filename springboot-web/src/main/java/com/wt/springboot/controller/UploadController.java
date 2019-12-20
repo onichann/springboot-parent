@@ -2,22 +2,18 @@ package com.wt.springboot.controller;
 
 
 import com.wt.springboot.exception.SpringWebException;
-import com.wt.springboot.pojo.SealResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
@@ -33,21 +29,16 @@ import java.util.UUID;
 @RequestMapping("/upload")
 public class UploadController {
 
-//    @Value("#{config.test.url}")
-//    @Value("#{T(java.io.File).separator}")
     @Value("${uploadDir}")
     private String filePath;
-
-
     /**
      * 上传
      * @param files
-     * @param params
      * @return
      */
     @PostMapping(value="/upload")
     @ResponseBody
-    public Map updateItems(@RequestParam(value = "file") MultipartFile[] files, @RequestParam(value = "map",required = false) Map params) {
+    public Map updateItems(@RequestParam(value = "file") MultipartFile[] files) {
         Map map=new HashMap<>();
         try {
            long  startTime=System.currentTimeMillis();
@@ -201,29 +192,5 @@ public class UploadController {
     public String errorHandler(Exception e){
         System.out.println(e.getMessage());
         return e.getMessage();
-    }
-
-
-    @RequestMapping(value = "/test",method = {RequestMethod.GET})
-    @ResponseBody
-    public Object test(){
-        File file = new File("F:" + File.separator + "laspb.pdf");
-        String sealData="{\"sourceId\":201908130001,\"businessCode\": \"TD-ZF-JDS\",\"departmentCode\": \"310000\",\"fileName\": \"laspb.pdf\",\"sealDataList\": [{\"positionY\":\"0\" ,\"page\": \"1\",\"type\": \"keyword\",\"keyword\": \"sign\",\"positionX\":\"0\" ,\"fillInText\": \"\"}]}";
-        return signSeal(sealData, file);
-    }
-
-    @Autowired
-    private RestTemplate restTemplate;
-
-    private SealResponse signSeal(String sealData, File file){
-        Resource resource=new FileSystemResource(file);
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
-        params.add("file", resource);
-        params.add("sealData", sealData);
-        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        headers.add(HttpHeaders.CONTENT_TYPE,MediaType.MULTIPART_FORM_DATA_VALUE);
-        HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(params, headers);
-        ResponseEntity<SealResponse> responseEntity = restTemplate.exchange("url", HttpMethod.POST, httpEntity, new ParameterizedTypeReference<SealResponse>() {});
-        return responseEntity.getBody();
     }
 }

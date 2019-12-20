@@ -1,4 +1,4 @@
-package com.wt.springboot.common;
+package com.wt.springboot.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

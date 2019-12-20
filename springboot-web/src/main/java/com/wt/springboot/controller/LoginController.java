@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
 
-    private Log log= LogFactory.getLog(LoginController.class);
+    private static final  Log logger = LogFactory.getLog(LoginController.class);
 
     @RequestMapping("/webLogout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response){

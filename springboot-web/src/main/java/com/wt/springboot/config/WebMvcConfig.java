@@ -1,23 +1,11 @@
 package com.wt.springboot.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring5.view.ThymeleafViewResolver;
-import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -32,19 +20,6 @@ public class WebMvcConfig implements WebMvcConfigurer{
     //解决中文返回浏览器乱码
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-//        Iterator<HttpMessageConverter<?>> iterator = converters.iterator();
-//        while (iterator.hasNext()){
-//            HttpMessageConverter<?> next = iterator.next();
-//            if(next instanceof  StringHttpMessageConverter){
-//                iterator.remove();
-//            }
-//        }
-//        converters.removeIf(new Predicate<HttpMessageConverter<?>>() {
-//            @Override
-//            public boolean test(HttpMessageConverter<?> httpMessageConverter) {
-//                return httpMessageConverter instanceof StringHttpMessageConverter ;
-//            }
-//        });
         converters.removeIf(StringHttpMessageConverter.class::isInstance);
         StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
         converters.add(converter);
@@ -53,12 +28,10 @@ public class WebMvcConfig implements WebMvcConfigurer{
     //url 到视图映射
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("thymeleaf/login");
-        registry.addViewController("/jsplogin").setViewName("jsp/jsplogin");
-        registry.addViewController("/home").setViewName("thymeleaf/home");
-        registry.addViewController("/").setViewName("thymeleaf/home");
-        registry.addViewController("/hello").setViewName("thymeleaf/hello");
-        registry.addRedirectViewController("/error","jsp/error.jsp");
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/home").setViewName("/home");
+        registry.addViewController("/").setViewName("home");
+        registry.addViewController("/hello").setViewName("hello");
     }
 
     //拦截器
@@ -82,7 +55,6 @@ public class WebMvcConfig implements WebMvcConfigurer{
     }
 
     //将参数String对应格式的转成Date类型
-
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new DateFormatter("yyyy-MM-dd"));
@@ -96,58 +68,6 @@ public class WebMvcConfig implements WebMvcConfigurer{
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //将所有/static/** 访问都映射到classpath:/static/ 目录下
-        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
         registry.addResourceHandler("/swagger3/**").addResourceLocations("classpath:/static/swagger3/");
-    }
-
-    /**
-     * 配置jsp 和thymeleaf共存
-     * @param webMvcProperties
-     * @return
-     */
-    @Bean
-    public ViewResolver viewResolver(@Autowired WebMvcProperties webMvcProperties) {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix(webMvcProperties.getView().getPrefix());
-        resolver.setSuffix(webMvcProperties.getView().getSuffix());
-        resolver.setViewClass(JstlView.class);
-        resolver.setViewNames("*");
-        resolver.setOrder(2);
-        return resolver;
-    }
-
-    @Bean("itemlateR")
-    public ITemplateResolver templateResolver(@Autowired ThymeleafProperties thymeleafProperties) {
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setTemplateMode(thymeleafProperties.getMode());
-        templateResolver.setPrefix(thymeleafProperties.getPrefix());
-        templateResolver.setSuffix(thymeleafProperties.getSuffix());
-        templateResolver.setCharacterEncoding(thymeleafProperties.getEncoding().name());
-        templateResolver.setCacheable(thymeleafProperties.isCache());
-        return templateResolver;
-    }
-
-    @Bean
-    public SpringTemplateEngine templateEngine(@Qualifier("itemlateR") ITemplateResolver iTemplateResolver) {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(iTemplateResolver);
-        // templateEngine
-        return templateEngine;
-    }
-
-    @Bean
-    public ThymeleafViewResolver viewResolverThymeLeaf(SpringTemplateEngine springTemplateEngine,
-                                                       @Autowired ThymeleafProperties thymeleafProperties) {
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(springTemplateEngine);
-        viewResolver.setCharacterEncoding(thymeleafProperties.getEncoding().name());
-        viewResolver.setOrder(1);
-        viewResolver.setViewNames(new String[]{"thymeleaf/*"});
-        return viewResolver;
-    }
-
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
     }
 }

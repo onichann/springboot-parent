@@ -1,4 +1,4 @@
-package com.wt.springboot.common.rtx;
+package com.wt.springboot.utils.rtx;
 
 /**
  * 封装对RTX的操作

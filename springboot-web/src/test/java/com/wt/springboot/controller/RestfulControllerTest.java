@@ -2,7 +2,7 @@ package com.wt.springboot.controller;
 
 
 import com.wt.springboot.SpringbootWebApplication;
-import com.wt.springboot.common.IDUtils;
+import com.wt.springboot.utils.IDUtils;
 import com.wt.springboot.pojo.ReturnJson;
 import com.wt.springboot.pojo.Student;
 import org.junit.After;

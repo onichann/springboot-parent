@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.itextpdf.text.DocumentException;
-import com.wt.springboot.common.PdfEditor;
+import com.wt.springboot.utils.PdfEditor;
 import com.wt.springboot.pojo.Result;
 import com.wt.springboot.pojo.SealData;
 import com.wt.springboot.pojo.SealResponse;

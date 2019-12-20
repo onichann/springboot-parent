@@ -1,4 +1,4 @@
-package com.wt.springboot.common;
+package com.wt.springboot.utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;

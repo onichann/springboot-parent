@@ -1,7 +1,7 @@
 package com.wt.springboot.service.Impl;
 
 
-import com.wt.springboot.common.IDUtils;
+import com.wt.springboot.utils.IDUtils;
 import com.wt.springboot.pojo.Student;
 import com.wt.springboot.service.StudentService;
 import org.springframework.stereotype.Service;

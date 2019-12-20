@@ -2,9 +2,7 @@ package com.wt.springboot.executor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author Administrator
@@ -22,7 +20,35 @@ public class ExecutorDemo {
 
     }
 
+    public static void test() throws ExecutionException, InterruptedException, TimeoutException {
+        System.out.println("主线程："+Thread.currentThread().getName());
+
+        ExecutorService executorService = Executors.newFixedThreadPool(8);
+        //1.
+        executorService.submit(() -> System.out.println("子线程："+Thread.currentThread().getName()));
+        //2.
+        FutureTask<String> stringFutureTask = new FutureTask<>(() -> "yes");
+        Future<?> submit = executorService.submit(stringFutureTask);
+        System.out.println(stringFutureTask.isDone()+"---------------");
+        System.out.println("submit="+stringFutureTask.get());
+        System.out.println(stringFutureTask.isDone()+"-------------------");
+        //3
+        ExecutorCompletionService<String> executorCompletionService = new ExecutorCompletionService<>(executorService);
+        executorCompletionService.submit(() -> "yes2");
+        System.out.println("submit="+executorCompletionService.take().get());
+        //关闭
+        executorService.shutdown();
+        try {
+            if (!executorService.awaitTermination(2000, TimeUnit.MILLISECONDS)) {
+                executorService.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            executorService.shutdownNow();
+        }
+    }
+
     public static void main(String[] args) {
         scheduledTreadPool();
+
     }
 }

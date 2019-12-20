@@ -1,6 +1,6 @@
 package com.wt.springboot;
 
-import com.wt.springboot.common.SpringContextUtil;
+import com.wt.springboot.utils.SpringContextUtil;
 import com.wt.springboot.mybatis.typeHandler.StringConvertTypeHandler;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
@@ -71,34 +71,14 @@ public class SpringbootWebApplication extends SpringBootServletInitializer {
 		return restTemplate;
 	}
 
-//    @Bean
-//    public MybatisCharSetConvertInterceptor mybatisCharSetConvertInterceptor(){
-//        return new MybatisCharSetConvertInterceptor();
-//    }
-//
-//    @Bean
-//    public MybatisResultSetHandlerInterceptor mybatisResultSetHandlerInterceptor() {
-//        return new MybatisResultSetHandlerInterceptor();
-//    }
-
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
-
-//    @Autowired
-//    private DataSource dataSource;
-
-//    @Autowired
-//    private DynamicDataSourceProperties properties;
 
 	@PostConstruct
 	public void initMybatis(){
 		TypeHandlerRegistry typeHandlerRegistry = sqlSessionFactory.getConfiguration().getTypeHandlerRegistry();
-//        Collection<TypeHandler<?>> typeHandlers = typeHandlerRegistry.getTypeHandlers();
-//        List<TypeHandler<?>> collect = typeHandlers.stream().filter(StringTypeHandler.class::isInstance).collect(Collectors.toList());
-//        typeHandlers.removeIf(StringTypeHandler.class::isInstance);
 		StringTypeHandler stringTypeHandler = new StringConvertTypeHandler();
 		typeHandlerRegistry.register(String.class, JdbcType.VARCHAR,stringTypeHandler);
-
 	}
 
 }

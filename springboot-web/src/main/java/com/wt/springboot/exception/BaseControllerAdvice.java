@@ -1,7 +1,7 @@
 package com.wt.springboot.exception;
 
 
-import com.wt.springboot.common.SpringContextUtil;
+import com.wt.springboot.utils.SpringContextUtil;
 import com.wt.springboot.pojo.ReturnJson;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
