@@ -3,7 +3,7 @@ package com.wt.springboot.javainteresting;
 import java.util.ArrayList;
 import java.util.List;
 
-public class interesting1 {
+public class Audition {
 
     public static void main(String[] args) {
         //50个人,从第一个人开始数,数到3的人出列
