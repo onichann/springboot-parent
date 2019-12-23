@@ -15,7 +15,7 @@ import java.util.List;
  * 或者extends WebMvcConfigurationSupport
  */
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer{
+public class WebMvcConfiguration implements WebMvcConfigurer{
 
     //解决中文返回浏览器乱码
     @Override

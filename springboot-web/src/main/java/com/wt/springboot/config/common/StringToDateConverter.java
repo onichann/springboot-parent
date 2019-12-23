@@ -1,4 +1,4 @@
-package com.wt.springboot.config;
+package com.wt.springboot.config.common;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;

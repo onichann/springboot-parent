@@ -1,6 +1,5 @@
 package com.wt.springboot;
 
-import com.wt.springboot.utils.SpringContextUtil;
 import com.wt.springboot.mybatis.typeHandler.StringConvertTypeHandler;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
@@ -11,19 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.client.ResponseErrorHandler;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.time.Duration;
 
 //@SpringBootApplication(exclude = {RedisAutoConfiguration.class})
 @SpringBootApplication
@@ -42,33 +33,12 @@ import java.time.Duration;
 public class SpringbootWebApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
-		ApplicationContext app = SpringApplication.run(SpringbootWebApplication.class, args);
-		SpringContextUtil.setCtx(app);
+		SpringApplication.run(SpringbootWebApplication.class, args);
 	}
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(SpringbootWebApplication.class);
-	}
-
-	@Autowired
-	private RestTemplateBuilder builder;
-
-	@Bean
-	public RestTemplate restTemplate() {
-		RestTemplate restTemplate= builder.setConnectTimeout(Duration.ofMillis(10000)).setReadTimeout(Duration.ofMillis(10000)).build();
-		restTemplate.setErrorHandler(new ResponseErrorHandler() {
-			@Override
-			public boolean hasError(ClientHttpResponse clientHttpResponse) throws IOException {
-				return true;
-			}
-
-			@Override
-			public void handleError(ClientHttpResponse clientHttpResponse) throws IOException {
-
-			}
-		});
-		return restTemplate;
 	}
 
 	@Autowired

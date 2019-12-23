@@ -1,7 +1,6 @@
 package com.wt.springboot.exception;
 
 
-import com.wt.springboot.utils.SpringContextUtil;
 import com.wt.springboot.pojo.ReturnJson;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,9 +8,11 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 @ControllerAdvice(basePackages = "com.wt.controller",annotations = {Controller.class, RestController.class})
 public class BaseControllerAdvice {
@@ -28,7 +29,7 @@ public class BaseControllerAdvice {
         if(AnnotationUtils.findAnnotation(e.getClass(),ResponseStatus.class)!=null){
             throw e;
         }
-        ReturnJson returnJson = SpringContextUtil.getCtx().getBean("returnJson", ReturnJson.class);
+        ReturnJson returnJson = Objects.requireNonNull(ContextLoader.getCurrentWebApplicationContext()).getBean("returnJson", ReturnJson.class);
         returnJson.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         returnJson.setData(e.toString());
         returnJson.setMessage("系统内部错误，请求访问失败");

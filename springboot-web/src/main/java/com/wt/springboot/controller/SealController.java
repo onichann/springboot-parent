@@ -5,10 +5,10 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.itextpdf.text.DocumentException;
-import com.wt.springboot.utils.PdfEditor;
-import com.wt.springboot.pojo.Result;
+import com.wt.springboot.pojo.ReturnJson;
 import com.wt.springboot.pojo.SealData;
 import com.wt.springboot.pojo.SealResponse;
+import com.wt.springboot.utils.PdfEditor;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -72,8 +72,9 @@ public class SealController {
     }
 
     @GetMapping("/signFilePath")
-    public @ResponseBody Result signFilePath(@RequestParam("fileName") String fileName,
-                                                   @RequestParam("filePath") String filePath){
+    public @ResponseBody
+    ReturnJson signFilePath(@RequestParam("fileName") String fileName,
+                            @RequestParam("filePath") String filePath){
         return sign(fileName, filePath);
     }
 
@@ -84,10 +85,10 @@ public class SealController {
      * @param fileName  pdf文件名称   如 a.pdf
      * @return
      */
-    public Result sign(String fileName, String oldPdfPath) {
+    public ReturnJson sign(String fileName, String oldPdfPath) {
         InputStream inputStream = null;
         OutputStream tempOutputStream = null;
-        Result result;
+        ReturnJson result;
         try {
             inputStream = new FileInputStream(oldPdfPath);
             //将受保护的pdf转成未受保护，否则签章无法读取pdf
@@ -99,10 +100,10 @@ public class SealController {
             SealResponse response = signSeal(JSON.toJSONString(buildSealData(fileName,new FileInputStream(tempPdf))), new File(tempPdf));
             //base64转pdf
             decryptBase64(response.getData(), fileName);
-            result = new Result().setSuccess(Boolean.TRUE).setData(sealOutPath + File.separator + fileName);
+            result = new ReturnJson().setSuccess(Boolean.TRUE).setData(sealOutPath + File.separator + fileName);
         } catch (IOException | NoSuchFieldException | IllegalAccessException | DocumentException e) {
             logger.debug("签章失败",e);
-            result = new Result().setSuccess(Boolean.FALSE).setMessage(e.getMessage());
+            result = new ReturnJson().setSuccess(Boolean.FALSE).setMessage(e.getMessage());
         }finally {
             IOUtils.closeQuietly(inputStream);
             IOUtils.closeQuietly(tempOutputStream);

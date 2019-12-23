@@ -1,12 +1,12 @@
 package com.wt.springboot.controller;
 
+import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.wt.springboot.config.EnvConfig;
 import com.wt.springboot.config.PropConfig;
 import com.wt.springboot.exception.SpringWebException;
 import com.wt.springboot.pojo.ReturnJson;
-import com.wt.springboot.utils.IDUtils;
 import com.wt.springboot.utils.IPUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,7 +61,7 @@ public class IndexController  {
     @RequestMapping("/json")
     @ResponseBody
     public void json(HttpServletRequest request,HttpServletResponse response,@Autowired ReturnJson returnJson){
-        response.setHeader("token", IDUtils.getUUID());
+        response.setHeader("token", IdUtil.simpleUUID());
         String jsonString = JSON.toJSONString(returnJson, SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty);
         String ipAddr = IPUtil.getIpAddr(request);
         String str=configProperties.getUrl()+"||"+uploadDir+"||"+envConfig.getJAVA_HOME()+ "||中文";
