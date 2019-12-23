@@ -2,9 +2,7 @@ package com.wt.springboot.controller;
 
 
 import com.wt.springboot.SpringbootWebApplication;
-import com.wt.springboot.utils.IDUtils;
 import com.wt.springboot.pojo.ReturnJson;
-import com.wt.springboot.pojo.Student;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,17 +63,7 @@ public class RestfulControllerTest {
 
     @Test
     public void insertStudent() {
-//        Student student= SpringContextUtil.getCtx().getBean("student",Student.class);
-        Student student= new Student();
-        student.setFeatid(IDUtils.getUUID());
-        student.setAge(18);
-        student.setBirthday(getDate());
-        student.setCreatetime(getDateTime());
-        student.setName("张三");
-        student.setScore(12.21);
-        String res=restTemplate.postForObject(uri+"/system/student",student,String.class);
-//        System.out.println(res);
-        HttpEntity body=new HttpEntity(student);
+        HttpEntity body=new HttpEntity(null);
         ResponseEntity<ReturnJson> returnJsonResponseEntity=restTemplate.exchange(uri+"/system/student", HttpMethod.POST,body, ReturnJson.class);
         System.out.println(returnJsonResponseEntity.getBody().getData());
     }
