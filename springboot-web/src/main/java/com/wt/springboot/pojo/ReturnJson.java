@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
 
-@Component("returnJson")
+@Component
 //@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class ReturnJson implements Serializable {
     private static final long serialVersionUID = -3049433887514970612L;
     private boolean success;
     private String  message;
-    private Object  Data;
+    private Object  data;
     private int code;
 
     public boolean isSuccess() {
@@ -32,11 +32,11 @@ public class ReturnJson implements Serializable {
     }
 
     public Object getData() {
-        return Data;
+        return data;
     }
 
     public void setData(Object data) {
-        Data = data;
+        this.data = data;
     }
 
     public int getCode() {

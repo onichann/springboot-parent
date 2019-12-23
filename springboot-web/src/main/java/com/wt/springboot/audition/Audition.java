@@ -1,4 +1,4 @@
-package com.wt.springboot.javainteresting;
+package com.wt.springboot.audition;
 
 import java.util.ArrayList;
 import java.util.List;
