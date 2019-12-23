@@ -29,7 +29,7 @@ import java.util.UUID;
 @RequestMapping("/upload")
 public class UploadController {
 
-    @Value("${uploadDir}")
+    @Value("${uploadDir:c:\\temp\\}")
     private String filePath;
     /**
      * 上传

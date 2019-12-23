@@ -1,5 +1,6 @@
 package com.wt.springboot;
 
+import com.wt.springboot.config.PropConfig;
 import com.wt.springboot.mybatis.typeHandler.StringConvertTypeHandler;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Repository;
@@ -30,6 +32,7 @@ import javax.annotation.PostConstruct;
 )
 //允许获取代理对象 AopContext.currentProxy()
 @EnableAspectJAutoProxy(exposeProxy = true)
+@EnableConfigurationProperties(PropConfig.class)
 public class SpringbootWebApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

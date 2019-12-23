@@ -47,13 +47,13 @@ public class SealController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("#{'${seal.sign.sync}'}")
+    @Value("${seal.sign.sync}")
     private String sealSyncUrl;
 
-    @Value("#{'${seal.sign.outPath}'}")
+    @Value("${seal.sign.outPath}")
     private String sealOutPath;
 
-    @Value("#{'${seal.sign.tempPath}'}")
+    @Value("${seal.sign.tempPath}")
     private String sealTempPath;
 
     @Autowired

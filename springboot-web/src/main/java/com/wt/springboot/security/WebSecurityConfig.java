@@ -106,9 +106,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     public static void main(String[] args) {
-        String a=new Pbkdf2PasswordEncoder("wut").encode("123456");
-        String b=new Pbkdf2PasswordEncoder("abc").encode("123");
-        System.out.println(a+","+b);
+        String b=new Pbkdf2PasswordEncoder("abc").encode("000");
+        System.out.println(b);
     }
 
 }

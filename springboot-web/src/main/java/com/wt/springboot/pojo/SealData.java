@@ -1,8 +1,8 @@
 package com.wt.springboot.pojo;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import java.util.List;
  */
 @Configuration
 @ConfigurationProperties(prefix = "seal.sealdata")
+@PropertySource("classpath:config.properties")
 public class SealData {
 
     public SealData() {

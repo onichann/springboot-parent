@@ -22,7 +22,7 @@ import java.util.Objects;
 @Service
 public class SealTokenService {
 
-    @Autowired
+    @Autowired(required = false)
     public SealToken sealToken;
 
     @Autowired

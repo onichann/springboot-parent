@@ -21,12 +21,8 @@ import java.util.Date;
 @Service
 public class JwtSevice {
 
-    @Value("${auth.token.secret}")
+    @Value("wut")
     private String secret;
-
-    @Value("#{'${auth.token.secret}'}")
-    private String secret1;
-
 
     @RequestMapping("/token")
     public String generateToken(String sub){
