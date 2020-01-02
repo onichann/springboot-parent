@@ -1,6 +1,8 @@
 package com.wt.springboot.zookeeper;
 
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.state.ConnectionState;
+import org.apache.curator.framework.state.ConnectionStateListener;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,19 @@ public class ZooController {
         client.create().inBackground((curatorFramework, curatorEvent) -> {
             System.out.println(String.format("eventType:%s,resultCode:%s", curatorEvent.getType(), curatorEvent.getResultCode()));
         }).forPath("path");
+
+        client.getConnectionStateListenable().addListener(new ConnectionStateListener() {
+            @Override
+            public void stateChanged(CuratorFramework curatorFramework, ConnectionState state) {
+                if(state == ConnectionState.CONNECTED){
+                    System.out.println("zk connected..");
+                }else if(state == ConnectionState.LOST){
+                    System.out.println("zk session lost..");
+                }else if(state == ConnectionState.RECONNECTED){
+                    System.out.println("zk reconnected..");
+                }
+            }
+        });
+
     }
 }
