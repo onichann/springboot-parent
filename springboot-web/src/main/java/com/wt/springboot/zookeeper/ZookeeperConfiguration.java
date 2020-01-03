@@ -27,7 +27,7 @@ public class ZookeeperConfiguration implements DisposableBean {
                 zookeeperProperties.getSessionTimeoutMs(),
                 zookeeperProperties.getConnectionTimeoutMs(),
                 new RetryNTimes(zookeeperProperties.getRetryCount(), zookeeperProperties.getElapsedTimeMs())
-        ).usingNamespace("zoo");
+        );
     }
 
     @Override
