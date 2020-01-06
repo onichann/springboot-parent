@@ -3,10 +3,7 @@ package com.wt.springboot.zookeeper;
 import org.apache.commons.codec.Charsets;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.api.transaction.CuratorTransactionResult;
-import org.apache.curator.framework.recipes.cache.ChildData;
-import org.apache.curator.framework.recipes.cache.PathChildrenCache;
-import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
-import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
+import org.apache.curator.framework.recipes.cache.*;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.framework.state.ConnectionStateListener;
@@ -134,5 +131,31 @@ public class ZooController {
             System.out.println("getCurrentData:" + data.getPath() + " = " + new String(data.getData()));
         }
         cache.close();
+    }
+
+    @RequestMapping("/nodeCache")
+    @ResponseBody
+    public void nodeCache() throws Exception {
+        NodeCache nodeCache = new NodeCache(client, "/nodeCache");
+        nodeCache.start(true);//第一次启动的时候就会立刻在Zookeeper上读取对应节点的数据内容，并保存在Cache中
+        nodeCache.getListenable().addListener(new NodeCacheListener() {
+            @Override
+            public void nodeChanged() throws Exception {
+                ChildData currentData = nodeCache.getCurrentData();
+                if (null != currentData) {
+                    System.out.println("路径为：" + nodeCache.getCurrentData().getPath());
+                    System.out.println("数据为：" + new String(nodeCache.getCurrentData().getData()));
+                    System.out.println("状态为：" + nodeCache.getCurrentData().getStat());
+                }else{
+                    System.out.println("节点被删除!");
+                }
+            }
+        });
+        client.create().forPath("/nodeCache", "01".getBytes());
+        Thread.sleep(100);
+        client.setData().forPath("/nodeCache", "02".getBytes());
+        Thread.sleep(100);
+        client.delete().deletingChildrenIfNeeded().forPath("/nodeCache");
+        nodeCache.close();
     }
 }
