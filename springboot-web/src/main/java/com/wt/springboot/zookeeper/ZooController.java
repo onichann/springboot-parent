@@ -1,7 +1,12 @@
 package com.wt.springboot.zookeeper;
 
+import org.apache.commons.codec.Charsets;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.api.transaction.CuratorTransactionResult;
+import org.apache.curator.framework.recipes.cache.ChildData;
+import org.apache.curator.framework.recipes.cache.PathChildrenCache;
+import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
+import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.framework.state.ConnectionState;
 import org.apache.curator.framework.state.ConnectionStateListener;
@@ -104,5 +109,30 @@ public class ZooController {
         }
         TimeUnit.SECONDS.sleep(2);
         countDownLatch.countDown();
+    }
+
+    @RequestMapping("/pathCache")
+    @ResponseBody
+    public void pathCache() throws Exception {
+        PathChildrenCache cache = new PathChildrenCache(client, "/pathCache", true);
+        cache.start(PathChildrenCache.StartMode.POST_INITIALIZED_EVENT);
+        cache.getListenable().addListener(new PathChildrenCacheListener() {
+            @Override
+            public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
+                PathChildrenCacheEvent.Type type = event.getType();
+                System.out.println("事件类型:"+type);
+                if (null != event.getData()) {
+                    System.out.println("节点数据:"+event.getData().getPath()+"="+new String(event.getData().getData(), Charsets.UTF_8));
+                }
+            }
+        });
+        client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath("/pathCache/t","01".getBytes());
+        Thread.sleep(10);
+        client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath("/pathCache/t","02".getBytes());
+        Thread.sleep(10);
+        for (ChildData data : cache.getCurrentData()) {
+            System.out.println("getCurrentData:" + data.getPath() + " = " + new String(data.getData()));
+        }
+        cache.close();
     }
 }
