@@ -1,9 +1,12 @@
 package com.wt.springboot.controller;
 
 
+import cn.hutool.core.io.FileUtil;
+import com.google.common.base.Strings;
 import com.wt.springboot.exception.SpringWebException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.Consts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -21,9 +24,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.nio.file.NoSuchFileException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 @Controller
 @RequestMapping("/upload")
@@ -101,6 +107,20 @@ public class UploadController {
         }
         return bodyBuilder.body(FileUtils.readFileToByteArray(file));
 
+    }
+
+    public static ResponseEntity<byte[]> download(String filePath) throws IOException {
+        checkArgument(!Strings.isNullOrEmpty(filePath));
+        File file = new File(filePath);
+        if(!file.exists()){
+            throw new NoSuchFileException(filePath);
+        }
+        ResponseEntity.BodyBuilder bodyBuilder = ResponseEntity.ok();
+        bodyBuilder.contentLength(file.length());
+        bodyBuilder.contentType(MediaType.APPLICATION_OCTET_STREAM);
+        String fileName = URLEncoder.encode(FileUtil.getName(file), Consts.UTF_8.name());
+        bodyBuilder.header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename="+fileName);
+        return bodyBuilder.body(FileUtils.readFileToByteArray(file));
     }
 
 
