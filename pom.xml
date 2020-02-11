@@ -13,6 +13,7 @@
 		<module>springboot-authorization</module>
 		<module>springboot-resource</module>
         <module>springboot-oauth2-sso</module>
+		<module>springboot-dingding</module>
 		<module>oldweb</module>
     </modules>
 
