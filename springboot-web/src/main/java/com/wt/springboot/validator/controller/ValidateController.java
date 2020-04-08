@@ -2,11 +2,15 @@ package com.wt.springboot.validator.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.wt.springboot.pojo.ReturnJson;
 import com.wt.springboot.validator.pojo.ValidateBean;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolation;
@@ -61,5 +65,23 @@ public class ValidateController {
         return strBuilder.toString();
     }
 
+    @ExceptionHandler(value = { MethodArgumentNotValidException.class,ConstraintViolationException.class })
+    public ReturnJson handleResourceNotFoundException(Exception e) {
+        StringBuilder strBuilder = new StringBuilder();
+        if(e instanceof MethodArgumentNotValidException){
+            BindingResult bindingResult = ((MethodArgumentNotValidException) e).getBindingResult();
+            if (bindingResult.hasErrors()) {
+                for (ObjectError error : bindingResult.getAllErrors()) {
+                    strBuilder.append(error.getDefaultMessage()).append(",");
+                }
+            }
+        }else if(e instanceof ConstraintViolationException){
+            Set<ConstraintViolation<?>> violations = ((ConstraintViolationException)e).getConstraintViolations();
+            for (ConstraintViolation<?> violation : violations ) {
+                strBuilder.append(violation.getMessage()).append(",");
+            }
+        }
+        return new ReturnJson().setCode(HttpStatus.BAD_REQUEST.value()).setData(strBuilder.toString());
+    }
 
 }
