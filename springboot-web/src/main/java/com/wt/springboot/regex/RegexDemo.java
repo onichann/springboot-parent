@@ -24,5 +24,14 @@ public class RegexDemo {
         String change = matcher1.replaceAll(" ?");
         System.out.println(change);
 
+        System.out.println("-----------------------");
+        String str = ".304..313.";
+        String pattern = "(?<=^\\.)\\d+(?=\\.)";
+
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(str);
+        m.find();
+        System.out.println(m.group());
+
     }
 }
