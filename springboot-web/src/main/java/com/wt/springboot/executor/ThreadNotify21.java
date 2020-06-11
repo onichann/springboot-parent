@@ -70,8 +70,8 @@ public class ThreadNotify21 {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         ThreadNotify21 threadNotify2 = new ThreadNotify21();
-        executorService.submit(threadNotify2.new A());
         executorService.submit(threadNotify2.new B());
+        executorService.submit(threadNotify2.new A());
         executorService.shutdown();
     }
 
