@@ -1,4 +1,4 @@
-package com.wt.springboot;
+package com.wt.springboot.mybatis.result;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

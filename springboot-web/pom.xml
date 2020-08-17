@@ -255,6 +255,7 @@
 			<version>2.3.28</version>
 		</dependency>
 
+		<!--mdb-->
 		<dependency>
 			<groupId>net.sf.ucanaccess</groupId>
 			<artifactId>ucanaccess</artifactId>
@@ -266,6 +267,15 @@
 		<!--            <artifactId>jackcess-encrypt</artifactId>-->
 		<!--            <version>3.0.1</version>-->
 		<!--        </dependency>-->
+
+		<!--mdb-->
+
+
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.7.2</version>
+		</dependency>
 
 	</dependencies>
 

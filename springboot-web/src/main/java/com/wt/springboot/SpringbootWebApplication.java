@@ -2,6 +2,7 @@ package com.wt.springboot;
 
 import com.wt.springboot.config.PropConfig;
 import com.wt.springboot.mybatis.typeHandler.StringConvertTypeHandler;
+import okhttp3.OkHttpClient;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.StringTypeHandler;
@@ -13,10 +14,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import java.time.Duration;
 
 //@SpringBootApplication(exclude = {RedisAutoConfiguration.class})
 @SpringBootApplication
@@ -52,6 +55,15 @@ public class SpringbootWebApplication extends SpringBootServletInitializer {
 		TypeHandlerRegistry typeHandlerRegistry = sqlSessionFactory.getConfiguration().getTypeHandlerRegistry();
 		StringTypeHandler stringTypeHandler = new StringConvertTypeHandler();
 		typeHandlerRegistry.register(String.class, JdbcType.VARCHAR,stringTypeHandler);
+	}
+
+	@Bean
+	public OkHttpClient okHttpClient() {
+		return new OkHttpClient.Builder()
+				.connectTimeout(Duration.ofSeconds(60)).writeTimeout(Duration.ofSeconds(60))
+				.readTimeout(Duration.ofSeconds(60)).callTimeout(Duration.ofSeconds(60))
+				.retryOnConnectionFailure(true)
+				.build();
 	}
 
 }

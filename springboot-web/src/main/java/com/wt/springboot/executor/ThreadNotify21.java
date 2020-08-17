@@ -1,7 +1,7 @@
 package com.wt.springboot.executor;
 
 
-import com.wt.Mutex;
+import com.wt.springboot.aqs.Mutex;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
