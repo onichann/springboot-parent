@@ -15,6 +15,7 @@
         <module>springboot-oauth2-sso</module>
 		<module>springboot-dingding</module>
 		<module>oldweb</module>
+        <module>springboot-activiti-bps</module>
     </modules>
 
 	<groupId>com.wt</groupId>
