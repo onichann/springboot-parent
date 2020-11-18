@@ -26,6 +26,7 @@ public class BitMapDemo {
             }
         });
         System.out.println(aByte.get());
+        System.out.println(Integer.toBinaryString(aByte.get()));
 
         BitSet bitSet = new BitSet(5);
         bitSet.set(0);
@@ -33,8 +34,18 @@ public class BitMapDemo {
         bitSet.set(2);
         bitSet.set(3);
         bitSet.set(4);
+        System.out.println(bitSet.get(4));
+        System.out.println(bitSet.get(5));
         System.out.println(bitSet.toString());
         System.out.println(bitSet.size());
+        byte i=1;
+        System.out.println(i<<6);
+        System.out.println(i<<8);
+        System.out.println(2^6-1);
+        long[] map=new long[5];
+        System.out.println(map[1]);
+
+        System.out.println(1L<<129);
     }
 
 }
