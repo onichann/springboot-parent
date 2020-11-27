@@ -45,7 +45,7 @@ public class BitMapDemo {
         long[] map=new long[5];
         System.out.println(map[1]);
 
-        System.out.println(1L<<129);
+        System.out.println(1L<<129);  //2  下标从0开始  ，所有数字对应bit下标， 第0为不放数字，尤其注意下标问题
     }
 
 }
