@@ -82,4 +82,10 @@ public class BioServer {
             }
         }
     }
+
+    public static void main(String[] args) throws Exception{
+        BioServer bioServer = new BioServer();
+        bioServer.start();
+        System.in.read();
+    }
 }
