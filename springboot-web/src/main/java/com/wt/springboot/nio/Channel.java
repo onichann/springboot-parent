@@ -3,8 +3,7 @@ package com.wt.springboot.nio;
 import lombok.SneakyThrows;
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
@@ -58,4 +57,39 @@ public class Channel {
         writeChannel.close();
         System.out.println("复制完成!");
     }
+
+    @Test
+    public void ScatterAndGather() throws IOException {
+//        byte[] bytes = "环境：1".getBytes();
+        RandomAccessFile raf1 =new RandomAccessFile("d:\\1.txt", "rw");
+        ByteBuffer bf1 = ByteBuffer.allocate(10);
+        ByteBuffer bf2 = ByteBuffer.allocate(1024);
+        FileChannel channel = raf1.getChannel();
+        channel.read(new ByteBuffer[]{bf1, bf2});
+        bf1.flip();
+        bf2.flip();
+        System.out.println(new String(bf1.array(), 0, bf1.remaining()));
+        System.out.println("-------------------");
+        System.out.println(new String(bf2.array(), 0, bf2.remaining()));
+        RandomAccessFile raf2 =new RandomAccessFile("d:\\2.txt", "rw");
+        raf2.getChannel().write(new ByteBuffer[]{bf1, bf2});
+    }
+
+    @Test
+    public void transferFile() throws IOException {
+        FileInputStream fs = new FileInputStream("d:\\1.txt");
+        FileOutputStream fos = new FileOutputStream("d:\\5.txt");
+        FileOutputStream fos2 = new FileOutputStream("d:\\6.txt");
+        FileChannel fsChannel = fs.getChannel();
+        FileChannel fosChannel = fos.getChannel();
+        fsChannel.transferTo(fsChannel.position(), fsChannel.size(), fosChannel);
+
+        FileChannel fos2Channel = fos2.getChannel();
+        fos2Channel.transferFrom(fsChannel, fsChannel.position(), fsChannel.size());
+
+        fsChannel.close();
+        fosChannel.close();
+        fos2.close();
+    }
+
 }
