@@ -17,6 +17,7 @@ import java.util.Iterator;
 public class NioServer {
 
     public static void main(String[] args) throws IOException {
+        System.out.println("----服务端启动---");
         ServerSocketChannel schannel = ServerSocketChannel.open();
         schannel.configureBlocking(false);
         schannel.bind(new InetSocketAddress(9999));
