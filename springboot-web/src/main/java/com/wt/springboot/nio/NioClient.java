@@ -23,6 +23,7 @@ public class NioClient {
 //            buffer.clear();
             String str = scanner.nextLine();
             buffer.put(str.getBytes());
+            buffer.flip();
             socketChannel.write(buffer);
             buffer.clear();
         }

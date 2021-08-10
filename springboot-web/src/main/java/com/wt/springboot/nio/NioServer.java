@@ -37,7 +37,7 @@ public class NioServer {
                     int len = 0;
                     while ((len = sChannel.read(buf)) > 0) {
                         buf.flip();
-                        System.out.println(new String(buf.array(), 0, len));
+                        System.out.println(new String(buf.array(), 0, buf.remaining()));
                         buf.clear();
                     }
                 }
