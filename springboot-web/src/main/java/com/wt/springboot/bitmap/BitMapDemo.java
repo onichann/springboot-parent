@@ -13,9 +13,16 @@ import java.util.stream.IntStream;
 public class BitMapDemo {
 
     public static void main(String[] args) {
+
+        long[] myLong = new long[1]; //默认值是 0
+        System.out.println(Long.toBinaryString(myLong[0]));
+
+        System.out.println(2014/8);//...6     1111 1111
+
         AtomicReference<Byte> aByte = new AtomicReference<>(new Byte("0"));
         IntStream.range(2014,2019).forEach(i->{
-            aByte.set(Integer.valueOf(aByte.get()|(((byte)1)<<(i-2014))).byteValue());
+//            aByte.set(Integer.valueOf(aByte.get()|(((byte)1)<<(i-2014))).byteValue());
+            aByte.set((byte) (aByte.get()|(1 <<(i-2014))));
         });
         System.out.println("原始数据:2014,2015,2016,2017,2018");
         System.out.println("测试数据:2019,2018,2020,2021,2017,2016");
@@ -46,6 +53,11 @@ public class BitMapDemo {
         System.out.println(map[1]);
 
         System.out.println(1L<<129);  //2  下标从0开始  ，所有数字对应bit下标， 第0为不放数字，尤其注意下标问题
+        //129 * 64 == 2 ...1  所以左移一位 2的1次方 为 2
+
+
+        System.out.println(63/64);
+
     }
 
 }
