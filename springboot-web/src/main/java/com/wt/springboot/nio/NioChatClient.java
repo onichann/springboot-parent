@@ -54,7 +54,8 @@ public class NioChatClient {
                     if (selectionKey.isReadable()) {
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
                         socketChannel.read(buffer);
-                        System.out.println(new String(buffer.array()));
+                        buffer.flip();
+                        System.out.println(new String(buffer.array(),0,buffer.remaining()));
                     }
                     iterator.remove();
                 }
