@@ -79,7 +79,7 @@ public class NioChatServer {
 
     private void sendToOtherClients(ByteBuffer buffer, SocketChannel skChannel) throws IOException {
         System.out.println("服务器转发数据给客户端线程: " + Thread.currentThread().getName());
-        for (SelectionKey selectionKey : selector.selectedKeys()) {
+        for (SelectionKey selectionKey : selector.keys()) {
             SelectableChannel channel = selectionKey.channel();
             if(channel instanceof SocketChannel&& channel!=skChannel){
                 ((SocketChannel) channel).write(buffer);
