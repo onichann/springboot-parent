@@ -26,12 +26,12 @@ public class RegexDemo {
 
         System.out.println("-----------------------");
         String str = ".304..313.";
-        String pattern = "(?<=^\\.)\\d+(?=\\.)";
+        String pattern = "(?<=\\.)\\d+(?=\\.)";
 
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(str);
-        m.find();
-        System.out.println(m.group());
-
+        while(m.find()){
+            System.out.println(m.group());
+        }
     }
 }
