@@ -13,7 +13,6 @@
 		<module>springboot-authorization</module>
 		<module>springboot-resource</module>
         <module>springboot-oauth2-sso</module>
-		<module>springboot-dingding</module>
 		<module>oldweb</module>
     </modules>
 
@@ -238,6 +237,14 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<!--如果没有该配置项，devtools 不会起作用，应用不会restart-->
+						<fork>true</fork>
+					</configuration>
+				</plugin>
 
 			</plugins>
 		</pluginManagement>

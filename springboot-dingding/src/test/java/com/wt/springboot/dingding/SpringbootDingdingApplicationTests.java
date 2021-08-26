@@ -1,7 +1,12 @@
 package com.wt.springboot.dingding;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wt.springboot.dingding.mongodb.DocumentService;
+import com.wt.springboot.dingding.mongodb.User;
+import lombok.SneakyThrows;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -9,8 +14,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SpringbootDingdingApplicationTests {
 
+    @Autowired
+    private DocumentService documentService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @SneakyThrows
     @Test
     public void contextLoads() {
+        User user = documentService.insert();
+        System.out.println(objectMapper.writeValueAsString(user));
     }
 
 }

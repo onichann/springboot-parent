@@ -290,11 +290,23 @@
 			<version>5.2.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.gisinfo</groupId>
-			<artifactId>gisinfo-sand-core</artifactId>
-			<version>2.1.6.8</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.gisinfo</groupId>-->
+<!--			<artifactId>gisinfo-sand-core</artifactId>-->
+<!--			<version>2.1.6.8</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>com.gisinfo</groupId>-->
+<!--			<artifactId>full-text-search-service</artifactId>-->
+<!--			<version>1.0.2</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>com.gisinfo</groupId>-->
+<!--			<artifactId>fullwordsearch</artifactId>-->
+<!--			<version>0.0.1</version>-->
+<!--		</dependency>-->
 
 	</dependencies>
 
