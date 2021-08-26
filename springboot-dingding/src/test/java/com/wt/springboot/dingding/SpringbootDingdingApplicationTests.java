@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wt.springboot.dingding.mongodb.DocumentService;
 import com.wt.springboot.dingding.mongodb.User;
 import lombok.SneakyThrows;
+import org.bson.Document;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,24 @@ public class SpringbootDingdingApplicationTests {
 
     @SneakyThrows
     @Test
-    public void contextLoads() {
+    public void test1() {
         User user = documentService.insert();
         System.out.println(objectMapper.writeValueAsString(user));
+    }
+
+
+    @SneakyThrows
+    @Test
+    public void test2() {
+        User user = documentService.save();
+        System.out.println(objectMapper.writeValueAsString(user));
+    }
+
+    @SneakyThrows
+    @Test
+    public void test3() {
+        Document document=documentService.test();
+        System.out.println(objectMapper.writeValueAsString(document));
     }
 
 }
