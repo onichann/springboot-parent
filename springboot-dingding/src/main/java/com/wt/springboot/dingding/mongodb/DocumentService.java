@@ -4,10 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Pat.Wu
@@ -70,6 +73,9 @@ public class DocumentService {
         return newUser;
     }
 
+
+
+
     public Document test() {
         // 自定义命令
         String jsonCommand = "{\"buildInfo\":1}";
@@ -79,5 +85,22 @@ public class DocumentService {
         return mongoTemplate.getDb().runCommand(bson);
     }
 
+    public List<User> findAll() {
+        List<User> all = mongoTemplate.findAll(User.class, COLLECTION_NAME);
+        for (User user : all) {
+            log.info("用户信息：{}", user);
+        }
+        return all;
+    }
+
+    public User findById() {
+        User user = mongoTemplate.findById("101", User.class, COLLECTION_NAME);
+        log.info("用户信息：{}", user);
+        return user;
+    }
+
+    public User findByCri() {
+//        Criteria criteria=Criteria.byExample(Example.of())
+    }
 
 }

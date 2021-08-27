@@ -296,11 +296,11 @@
 <!--			<version>2.1.6.8</version>-->
 <!--		</dependency>-->
 
-<!--		<dependency>-->
-<!--			<groupId>com.gisinfo</groupId>-->
-<!--			<artifactId>full-text-search-service</artifactId>-->
-<!--			<version>1.0.2</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.gisinfo</groupId>
+			<artifactId>full-text-search-service</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 
 <!--		<dependency>-->
 <!--			<groupId>com.gisinfo</groupId>-->

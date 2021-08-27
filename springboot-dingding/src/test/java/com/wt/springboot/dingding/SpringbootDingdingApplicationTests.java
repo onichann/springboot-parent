@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringbootDingdingApplicationTests {
@@ -41,6 +43,20 @@ public class SpringbootDingdingApplicationTests {
     public void test3() {
         Document document=documentService.test();
         System.out.println(objectMapper.writeValueAsString(document));
+    }
+
+    @SneakyThrows
+    @Test
+    public void test4() {
+        List<User> all = documentService.findAll();
+        System.out.println(objectMapper.writeValueAsString(all));
+    }
+
+    @SneakyThrows
+    @Test
+    public void test5() {
+        User user = documentService.findById();
+        System.out.println(objectMapper.writeValueAsString(user));
     }
 
 }
