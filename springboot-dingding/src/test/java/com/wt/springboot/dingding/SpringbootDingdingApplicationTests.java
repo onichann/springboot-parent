@@ -59,4 +59,11 @@ public class SpringbootDingdingApplicationTests {
         System.out.println(objectMapper.writeValueAsString(user));
     }
 
+    @SneakyThrows
+    @Test
+    public void test6() {
+        List<User> all = documentService.findByCri();
+        System.out.println(objectMapper.writeValueAsString(all));
+    }
+
 }
