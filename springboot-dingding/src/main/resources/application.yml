@@ -1,7 +1,7 @@
 server:
   port: 8081
 
-spring:
-  data:
-    mongodb:
-      uri: mongodb://test:test@192.168.164.128:27017/baike
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://test:test@192.168.164.128:27017/baike
