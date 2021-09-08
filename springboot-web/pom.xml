@@ -301,8 +301,12 @@
 			<artifactId>full-text-search-service</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
 
-<!--		<dependency>-->
+		<!--		<dependency>-->
 <!--			<groupId>com.gisinfo</groupId>-->
 <!--			<artifactId>fullwordsearch</artifactId>-->
 <!--			<version>0.0.1</version>-->

@@ -37,8 +37,8 @@ public class Common {
         String appId = "25c0665a-0ad4-11ec-9427-0a80ff2603de";
         String appSecret = "F286#ZPygafMC47e#^4^rPB7!^";
 //        String url = "http://hrpdev1.hrpackage.com/bf-portal/des/oauth/token";
-//        String url = "http://127.0.0.1:8080/bf-portal/des/oauth/token";
-        String url = "http://ujrzri.natappfree.cc/bf-portal/des/oauth/token";
+        String url = "http://127.0.0.1:8080/bf-portal/des/oauth/token";
+//        String url = "http://ujrzri.natappfree.cc/bf-portal/des/oauth/token";
         Map<String, Object> params = new HashMap<>();
         params.put("appId", appId);
         params.put("appSecret", appSecret);
@@ -47,7 +47,7 @@ public class Common {
     }
 
     public void getBusiness() throws Exception{
-        String token = "$1$zQiZhFGN$oJfRtFbmVY4I3.W1/Reh9.";
+        String token = "$1$QkBjJ/i6$QLBXHZKuYwIEDj9cN4wHx/";
         //RSA私钥
         String primaryKeyString = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALWoT5dcKH0kS5T/iIBnKIsAsNY8HPo+a7G8nGkOyKmIVH4gxXjlyTDyfHwe72ZJsoAe89bIDEER4OEQAmGvI0bz05OcdbYulJXKp5kkkYSSFEl80mJTmmamkQ7OvZElQWmaJ2LSavoVev8UxnT3akGbhoLHArPRcrd58jifI1qrAgMBAAECgYBu+oKVb+H0ggYC4xIbj+o+8Y8XcuYpI5VbomTT8go5OGaWH6NEtu1xD9NpaOTM0t1QVJiXcOO7pRaDqOorj3m2yYpPLCGGUDwK0bzqg4iEffc9KsvcFyLe9WmuGORMju32XB71Pv+4PgjGqddNkcIgOrcUw1gJ5R+rPLw0wdKGAQJBAN3Pub08Ox10WyZxA8h1EsnCOebnYdzG4QkswKJFbB4VTJ1ZtR6DibdukPF0M80/Ehq++N2ec7vAYoJrbi3/kysCQQDRqC7lRMuOH/dxVQEOZIrOJAe4inkzYIHkSJjjtDMtIti5tb5kI9qFWhYdgMfQYxtenV4i2uagVR5zH+pv3ZaBAkEAhbjzy0gCg5FgWl6L30/lUclMSw53izhC9tsKD0o3EjPZCovIi2rVncaEj2x0xmodqg4zzrf2IdysBuBpfkW0HQJBAJCr1Ehik2/sQQwUUxlCacHbfPRroTzBoIANVGr0AshnnlNvxQRG9VhFlLMhFUCH0vAT+Uxl7vS+J7fbUyOELYECQECPeJVD6ex+4dk7eJ1LRslYY6ioNNxslq33xyEZVeGJgflLeRpm5yk8eFzw8/Ll9kUfzVePQ0a3kOQgJzTuIYk=";
 //AES密钥
@@ -71,7 +71,8 @@ public class Common {
 //进行RSA签名
         requestParamsMap.put("signature", sha1RSASign(requestId + timestamp + requestBodyJSON, primaryKeyString));
 //        String result = HttpUtil.post("http://hrpdev1.hrpackage.com/bf-portal/des/60110001",requestParamsMap);
-        HttpResponse response = HttpUtil.createPost("http://127.0.0.1:8080/bf-portal/des/60110001").header("accessToken", token).header("Content-Type", "application/json").body(objectMapper.writeValueAsString(requestParamsMap)).execute();
+//        HttpResponse response = HttpUtil.createPost("http://127.0.0.1:8080/bf-portal/des/60110001").header("accessToken", token).header("Content-Type", "application/json").body(objectMapper.writeValueAsString(requestParamsMap)).execute();
+        HttpResponse response = HttpUtil.createPost("http://127.0.0.1:8080/bf-portal/des/60110002").header("accessToken", token).header("Content-Type", "application/json").body(objectMapper.writeValueAsString(requestParamsMap)).execute();
         System.out.println(response.body());
     }
 
