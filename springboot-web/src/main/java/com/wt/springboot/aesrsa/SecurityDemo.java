@@ -15,7 +15,8 @@ import java.security.spec.PKCS8EncodedKeySpec;
 /**
  * @author Pat.Wu
  * @date 2021/9/8 17:02
- * @description
+ * @description https://blog.csdn.net/cc_weige/article/details/84902593
+ * https://www.cnblogs.com/wuer888/p/7890711.html
  */
 public class SecurityDemo {
     @SneakyThrows
