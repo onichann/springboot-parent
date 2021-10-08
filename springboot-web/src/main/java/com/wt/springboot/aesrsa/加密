@@ -1,0 +1,126 @@
+公共请求参数说明：
+请求Header：
+
+名称
+类型
+必须
+值	描述
+Content-Type	String	是	application/json	请求类型
+其他公共请求参数
+
+名称
+类型
+必须
+描述
+app_key	String	是	分配的AppKey
+sign_method	String	是	签名的摘要算法，默认：md5。
+sign	String	是	签名结果
+timestamp	String	是	时间戳，取值System.currentTimeMillis()，允许客户端请求最大时间误差为10分钟
+请求url示例：
+http://admin.pqjobtest.sxlmhome.com/api/pqjob/server/JobSystemFacade/notify?app_key=15026215656565&sign_method=md5&sign=CDF3E662299FBA3544172E943112CE9B&timestamp=1609731267997
+
+请求参数示例：
+
+{
+    "businessType": 1,
+    "businessCode": ["90","94"],
+    "operateType": 4,
+    "customerBusinessCode": "97",
+    "status": 1,
+}
+请求参数说明：
+
+名称	类型	必须	示例值	描述
+businessType
+number
+false
+1
+业务类型 1招聘 2简历
+businessCode	String	false	["90","94"]	业务编号
+operateType	number	false	1	操作类型1.新增，2.更新，3.删除 4.状态更改
+customerBusinessCode	String	false	"97"	简历投递编号
+status	number	false	1	变更状态1.已投递，2.面试邀约，3.不合适，4.面试通过
+响应示例:
+
+success :
+
+{
+    "success": true,
+    "traceId": "[549aad17-86]"
+}
+failure :
+
+{
+    "errorCode": "STATUS_ERROR",
+    "errorMsg": "缺少必须的参数",
+    "success": false,
+    "traceId": "[549aad17-86]"
+}
+错误码解释:
+
+错误码	错误消息	解决方案
+ERR_001_00000005	参数错误	参数有误根据错误提示修改请求参数
+UPDATE_JOB_ERROR	更新职位失败
+STATUS_ERROR	求职状态类型错误	求职状态类型是否存在
+UPDATE_RESUMEDELIVER_STATUS_ERROR	更新简历投递状态失败
+QUERY_JOBSYSTEM_ERROR	获取招聘系统职位失败
+CHECK_SIGN_ERROR	验签失败	检查签名是否正确
+
+
+
+2. 请求签名流程
+操作	结果
+请求的url
+http://admin.pqjobtest.sxlmhome.com/common/einvoice/groupon/register?app_key=15026215656565&sign_method=md5&sign=CDF3E662299FBA3544172E943112CE9B&timestamp=1609731267997
+Payload	{"recruitIds":"NO10001,NO10002,NO10003","notifyType":"INSERT"}
+secret	26b509533673adaa39b4ee088cc761c6
+
+
+计算过程如下:
+
+解析URL，获取URL中的参数用于计算签名...
+读取参数：app_key=15026215656565
+读取参数：sign_method=md5
+读取参数：timestamp=1609731267997
+将URL参数中所有的KEY值进行排序，排序结果为
+["app_key","sign_method","timestamp"]
+现在把所有参加计算的参数名和参数值拼接在一起...
+拼接顺序为Secret、URL参数、Payload、Secret...
+URL参数拼接结果为
+app_key15026215sign_methodmd5timestamp1609731267997
+最终拼接结果为
+${secret}app_key15026215sign_methodmd5timestamp1609731267997{"recruitIds":"NO10001,NO10002,NO10003","notifyType":"INSERT"}${secret}
+开始进行MD5加密...
+计算签名结果为CDF3E662299FBA3544172E943112CE9B，签名过程结束。
+签名示例：
+
+public static String signRequest(Map<String, String> params, String body, String secret)
+    		throws IOException {
+
+    	// 第一步：检查参数是否已经排序
+    	String[] keys = params.keySet().toArray(new String[0]);
+    	Arrays.sort(keys);
+
+    	// 第二步：把所有参数名和参数值串在一起
+    	StringBuilder query = new StringBuilder();
+    	query.append(secret);
+
+    	for (String key : keys) {
+    		if (StringUtils.isNotBlank(key)) {
+    			String value = params.get(key);
+    			query.append(key).append((value == null) ? "" : value);
+    		}
+    	}
+
+    	// 第三步：把请求主体拼接在参数后面
+    	if (body != null) {
+    		query.append(body);
+    	}
+
+    	// 第四步：使用MD5加密
+    	query.append(secret);
+    	byte[] bytes = encryptMD5(query.toString());
+
+    	// 第五步：把二进制转化为大写的十六进制
+    	return byte2hex(bytes);
+    }
