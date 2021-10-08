@@ -1,16 +1,18 @@
 package com.wt.springboot.aesrsa;
 
 import cn.hutool.crypto.SecureUtil;
-import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.symmetric.AES;
 import lombok.SneakyThrows;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.Base64;
 
 /**
  * @author Pat.Wu
@@ -23,17 +25,18 @@ public class SecurityDemo {
     @SneakyThrows
     public static void main(String[] args) {
 //        testAES();
-        SecurityDemo securityDemo = new SecurityDemo();
-        String privateKey = "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAJKpVocxIorA6qugI16RnLUkLRIyoTL+BBEDLSphtn53nk5gkv/Kn6PUw6ZeGibZQfPf0VE4RVGo42tw1TbaMHoabhFhZ8jnZinUYMW89z0Ut8WTJ9MduyN+FL27Oqzx8+L/vl5atc+TWjH1YNvC2oia5ZLmrLCIFe1ZlGqtZ+jFAgMBAAECgYAKik0Drk5TNoYnC30/QKvIgO8UTbs0FPlp15aZYyhgcmxYKaym4YMTnSjqffzXKeoJgt5iPe8NbVvazuMj7A5rvBI9prgH/xBRGIt/CRpo0JBudQRCWrbcFMs2pnjmwAWKLOR9ftCPCQYNDd88ltfKIaYls6WljfLDjT4TSIYrgQJBANgOA5irXldSJoRPVVNK3EkiNdJlh86/YCJxXXiCx6BMADGB+oFnDY+YojmPk9ewk7HaEZeNtPtcRG9n1n5u7nUCQQCtxudb8I5EZw4HGE9xUBeVfXt0hJWARPyqDYCQI/2eYr0rk8SGeLnibvEHWgGw4KL6NIWrHurUx34VrSXslWcRAkAHMYBBJwN/GMcbhKCso0NuU+tC1AqPgaOrweaAyqnm1mDzRQaYJFw5ObW9AODFP6XLOB151EgATnQg2W40y3C5AkBaoDqUBhYLsjrslE8J5x0FhxVVJLfa1x91h+keQsbHTPMewMdi4Z7/aaAll1j+Z4hXOADlxw/su8UThOMcSKYhAkB3wyTNi0gsMNraLl0jPbil1aTPYoFWwANfAUH50UITORkoYGkYvsD2aTtMnpxmMXtQfh3gJRE/0sGoxyiq3fUo";
-        String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCRKbQOiPZo4G/rQv3A+m0XcCDvyZv/c2SkvLEKRXcYBui80QHSSs1JsGHDz57nUYPaw0CSuFbZVqHZpf76f3mSZ0qJgoR9O6UmVDKACoKw8WuxyZHFdtyPfbSFwxac55SHjgvya9CxuDYPGcUlnyYSGtrBvI6YGGBQqbhGnD0FjwIDAQAB";
-        String sign = sign("123", privateKey, "UTF-8");
-        System.out.println(sign);
-        System.out.println("---------------");
-        String s = SecureUtil.sha1("123");
-        String s1 = SecureUtil.rsa(privateKey, null).encryptBase64(s, StandardCharsets.UTF_8, KeyType.PrivateKey);
-        System.out.println(s1);
-        System.out.println("---------------");
-        System.out.println(s.equals(s1));
+//        SecurityDemo securityDemo = new SecurityDemo();
+//        String privateKey = "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAJKpVocxIorA6qugI16RnLUkLRIyoTL+BBEDLSphtn53nk5gkv/Kn6PUw6ZeGibZQfPf0VE4RVGo42tw1TbaMHoabhFhZ8jnZinUYMW89z0Ut8WTJ9MduyN+FL27Oqzx8+L/vl5atc+TWjH1YNvC2oia5ZLmrLCIFe1ZlGqtZ+jFAgMBAAECgYAKik0Drk5TNoYnC30/QKvIgO8UTbs0FPlp15aZYyhgcmxYKaym4YMTnSjqffzXKeoJgt5iPe8NbVvazuMj7A5rvBI9prgH/xBRGIt/CRpo0JBudQRCWrbcFMs2pnjmwAWKLOR9ftCPCQYNDd88ltfKIaYls6WljfLDjT4TSIYrgQJBANgOA5irXldSJoRPVVNK3EkiNdJlh86/YCJxXXiCx6BMADGB+oFnDY+YojmPk9ewk7HaEZeNtPtcRG9n1n5u7nUCQQCtxudb8I5EZw4HGE9xUBeVfXt0hJWARPyqDYCQI/2eYr0rk8SGeLnibvEHWgGw4KL6NIWrHurUx34VrSXslWcRAkAHMYBBJwN/GMcbhKCso0NuU+tC1AqPgaOrweaAyqnm1mDzRQaYJFw5ObW9AODFP6XLOB151EgATnQg2W40y3C5AkBaoDqUBhYLsjrslE8J5x0FhxVVJLfa1x91h+keQsbHTPMewMdi4Z7/aaAll1j+Z4hXOADlxw/su8UThOMcSKYhAkB3wyTNi0gsMNraLl0jPbil1aTPYoFWwANfAUH50UITORkoYGkYvsD2aTtMnpxmMXtQfh3gJRE/0sGoxyiq3fUo";
+//        String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCRKbQOiPZo4G/rQv3A+m0XcCDvyZv/c2SkvLEKRXcYBui80QHSSs1JsGHDz57nUYPaw0CSuFbZVqHZpf76f3mSZ0qJgoR9O6UmVDKACoKw8WuxyZHFdtyPfbSFwxac55SHjgvya9CxuDYPGcUlnyYSGtrBvI6YGGBQqbhGnD0FjwIDAQAB";
+//        String sign = sign("123", privateKey, "UTF-8");
+//        System.out.println(sign);
+//        System.out.println("---------------");
+//        String s = SecureUtil.sha1("123");//DigestUtil
+//        String s1 = SecureUtil.rsa(privateKey, null).encryptBase64(s, StandardCharsets.UTF_8, KeyType.PrivateKey);
+//        System.out.println(s1);
+//        System.out.println("---------------");
+//        System.out.println(s.equals(s1));
+          testRSA();
 
     }
 
@@ -64,6 +67,23 @@ public class SecurityDemo {
         String xxxx = aes.encryptBase64("xxx".getBytes());
         System.out.println(xxxx);
         System.out.println(new String(aes.decryptFromBase64(xxxx)));
+    }
+
+    public static void testRSA() throws Exception{
+        RSA rsa = new RSA();
+        System.out.println(rsa.getPublicKeyBase64());
+        System.out.println("-----------");
+        System.out.println(rsa.getPrivateKeyBase64());
+
+        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+        keyGen.initialize(1024);
+        KeyPair pair = keyGen.generateKeyPair();
+
+        byte[] publicBytes = pair.getPublic().getEncoded();
+        byte[] privateBytes = pair.getPrivate().getEncoded();
+
+        System.out.println("public key: " + Base64.getEncoder().encodeToString(publicBytes));
+        System.out.println("private key: " + Base64.getEncoder().encodeToString(privateBytes));
     }
 
 
