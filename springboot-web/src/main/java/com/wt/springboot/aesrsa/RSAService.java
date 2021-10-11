@@ -2,9 +2,11 @@ package com.wt.springboot.aesrsa;
 
 import cn.hutool.crypto.SecureUtil;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import sun.misc.BASE64Encoder;
 
+import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -107,6 +109,38 @@ public class RSAService {
     }
 
 
+    private byte[] encrypt(byte[] plain) {
+        try {
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.ENCRYPT_MODE,getPublicKey(PUBLICKEY));
+            return cipher.doFinal(plain);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private byte[] decrypt(byte[] plain) {
+        try {
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.DECRYPT_MODE,getPriveteKey(PRIVATEKEY));
+            return cipher.doFinal(plain);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SneakyThrows
+    public String encryptBase64(String plain) {
+        return Base64.getEncoder().encodeToString(encrypt(plain.getBytes(StandardCharsets.UTF_8)));
+    }
+
+    public String decryptBase64(String plain) {
+        return new String(decrypt(Base64.getDecoder().decode(plain)));
+    }
+
+
+
+
     public static void main(String[] args) throws Exception{
 //        KeyPair pair = SecureUtil.generateKeyPair("RSA");
 //        PrivateKey aPrivate = pair.getPrivate();
@@ -148,6 +182,9 @@ public class RSAService {
 //
 //        System.out.println( shortBuffer.toString());
 
+        String encryptPlain = rsaService.encryptBase64(plain);
+        System.out.println("加密后:" + encryptPlain);
+        System.out.println("解密后:"+rsaService.decryptBase64(encryptPlain));
     }
 
 
