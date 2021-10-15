@@ -19,6 +19,7 @@ public class AQSSingleton {
             }
             aqsSingleton = new AQSSingleton();
         }while (!ATOMIC_REFERENCE.compareAndSet(null, aqsSingleton));
+        System.out.println(1);
         return aqsSingleton;
     }
 
