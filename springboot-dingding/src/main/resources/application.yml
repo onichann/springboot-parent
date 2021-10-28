@@ -5,3 +5,14 @@ server:
 #  data:
 #    mongodb:
 #      uri: mongodb://test:test@192.168.164.128:27017/baike
+
+spring:
+  kafka:
+    bootstrap-servers: 192.168.164.128:9092
+    producer:
+      retries: 3 # 生产者发送失败时，重试次数
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: #https://cloud.tencent.com/developer/article/1814830
+    consumer:
+      group-id: myGroup
