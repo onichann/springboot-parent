@@ -13,6 +13,12 @@ spring:
       retries: 3 # 生产者发送失败时，重试次数
       batch-size: 16384
       buffer-memory: 33554432
-      key-serializer: #https://cloud.tencent.com/developer/article/1814830
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer  #https://cloud.tencent.com/developer/article/1814830
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
     consumer:
-      group-id: myGroup
+      group-id: myGroup # 默认消费者group id
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
