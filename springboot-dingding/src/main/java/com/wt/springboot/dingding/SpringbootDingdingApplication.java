@@ -19,23 +19,14 @@ public class SpringbootDingdingApplication {
 
 
     public PropertyMapper alwaysApplyingWhenNonNull() {
-        //            @Override
-//            public <T> PropertyMapper.Source<T> apply2(PropertyMapper.Source<T> source) {
-//                return xxx(source);
-//            }
-        return this.alwaysApplying(this::xxx);
+        return this.alwaysApplying(this::whenNonNull);
     }
 
 
 
-
-    public <T> PropertyMapper.Source<T> xxx(PropertyMapper.Source<T> source) {
+    private <T> PropertyMapper.Source<T> whenNonNull(PropertyMapper.Source<T> source) {
         return source.whenNonNull();
     }
-
-//    private <T> PropertyMapper.Source<T> whenNonNull(PropertyMapper.Source<T> source) {
-//        return source.whenNonNull();
-//    }
 
 
 
@@ -44,10 +35,9 @@ public class SpringbootDingdingApplication {
         return null;
     }
 
-//    @FunctionalInterface
+    @FunctionalInterface
     public interface SourceOperator {
         <T> PropertyMapper.Source<T> apply(PropertyMapper.Source<T> source);
-//        <T> PropertyMapper.Source<T> apply2(PropertyMapper.Source<T> source);
     }
 
 }
