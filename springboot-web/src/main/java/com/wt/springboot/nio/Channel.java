@@ -16,7 +16,7 @@ public class Channel {
     public static void main(String[] args) throws Exception {
         FileOutputStream fos = new FileOutputStream("d:\\channel.txt");
         FileChannel channel = fos.getChannel();
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        ByteBuffer buffer = ByteBuffer.allocateDirect(1024);
         buffer.put("bufferChannel文件".getBytes());
         buffer.flip();
         channel.write(buffer);
