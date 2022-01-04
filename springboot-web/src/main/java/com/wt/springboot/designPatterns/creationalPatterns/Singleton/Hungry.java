@@ -1,7 +1,7 @@
 package com.wt.springboot.designPatterns.creationalPatterns.Singleton;
 
 public class Hungry {
-    private static Hungry hungry=new Hungry();
+    private static final Hungry hungry=new Hungry();
     private Hungry() {
 
     }
