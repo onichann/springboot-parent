@@ -14,6 +14,7 @@
 		<module>springboot-resource</module>
         <module>springboot-oauth2-sso</module>
 		<module>oldweb</module>
+		<module>springboot-core</module>
     </modules>
 
 	<groupId>com.wt</groupId>
