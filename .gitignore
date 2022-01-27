@@ -30,6 +30,3 @@ my.*
 ### VS Code ###
 .vscode/
 
-.gitignore
-pom.xml
-src/
