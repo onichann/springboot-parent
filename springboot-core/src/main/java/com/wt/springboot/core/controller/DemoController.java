@@ -1,7 +1,6 @@
 package com.wt.springboot.core.controller;
 
 import com.wt.springboot.core.AsyncService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
@@ -17,7 +16,7 @@ import java.util.concurrent.ExecutionException;
  * @description
  */
 @RestController
-@Slf4j
+//@Slf4j
 public class DemoController {
 
     @Autowired
@@ -34,7 +33,7 @@ public class DemoController {
 
             @Override
             public void onSuccess(String result) {
-                log.info(result+System.currentTimeMillis());
+                System.out.println(result+System.currentTimeMillis());
             }
         });
         System.out.println(Thread.currentThread().getName()+"--out");
