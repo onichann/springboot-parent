@@ -1,0 +1,2 @@
+SingletonSupplier--单例获取supplier
+ListenableFutureAdapter--适配器
