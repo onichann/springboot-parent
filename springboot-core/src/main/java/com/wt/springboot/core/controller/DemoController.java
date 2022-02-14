@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * @author Pat.Wu
@@ -39,6 +41,23 @@ public class DemoController {
         System.out.println(Thread.currentThread().getName()+"--out");
         CompletableFuture<String> completable = future.completable();
         System.out.println(completable.get()+"--compleatbleFuture");
+        completable.handle(new BiFunction<String, Throwable, Object>() {
+            @Override
+            public Object apply(String s, Throwable throwable) {
+                return null;
+            }
+        }).exceptionally(new Function<Throwable, Object>() {
+            @Override
+            public Object apply(Throwable throwable) {
+                return null;
+            }
+        }).thenApply(new Function<Object, Object>() {
+            @Override
+            public Object apply(Object o) {
+                return null;
+            }
+        }).join();
+        String s = completable.get();
         return future.get();
     }
 }
