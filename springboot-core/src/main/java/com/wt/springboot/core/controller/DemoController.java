@@ -1,6 +1,6 @@
 package com.wt.springboot.core.controller;
 
-import com.wt.springboot.core.AsyncService;
+import com.wt.springboot.core.service.AsyncService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
