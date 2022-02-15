@@ -5,6 +5,10 @@ import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.AsyncTaskExecutor;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.SettableListenableFuture;
@@ -61,6 +65,16 @@ public class AsyncService {
         List<String> matcher = matcher(sql, variable_regex);
         System.out.println(matcher);
 
+        ExpressionParser parser = new SpelExpressionParser();
+        EvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("name", "路人甲java");
+        context.setVariable("lesson", "Spring系列");
+
+        //获取name变量，lesson变量
+        String name = parser.parseExpression("#name").getValue(context, String.class);
+        System.out.println(name);
+        String lesson = parser.parseExpression("#lesson").getValue(context, String.class);
+        System.out.println(lesson);
     }
 
     public static List<String> matcher(String content, String regex){
