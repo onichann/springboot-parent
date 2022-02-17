@@ -38,7 +38,7 @@ public class DemoController {
                 System.out.println(result+System.currentTimeMillis());
             }
         });
-        System.out.println(Thread.currentThread().getName()+"--out");
+        System.out.println(Thread.currentThread().getName()+"--out1");
         CompletableFuture<String> completable = future.completable();
         System.out.println(completable.get()+"--compleatbleFuture");
         completable.handle(new BiFunction<String, Throwable, Object>() {

@@ -49,7 +49,7 @@ public class RedissonConfig {
     @Bean(destroyMethod = "shutdown")
     RedissonClient redisson() throws Exception {
         Config config = new Config();
-        config.useSingleServer().setAddress(address)
+        config.useSingleServer().setAddress(address).setPassword(password)
                 .setConnectionMinimumIdleSize(connectionMinimumIdleSize)
                 .setConnectionPoolSize(connectionPoolSize)
                 .setDatabase(database)

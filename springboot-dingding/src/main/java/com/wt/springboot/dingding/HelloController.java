@@ -1,6 +1,5 @@
 package com.wt.springboot.dingding;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author zhiwen.zuo
  * @date 2021-07-26
  **/
-@Slf4j
+//@Slf4j
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
@@ -58,11 +57,11 @@ public class HelloController {
     private void run() {
         try {
             while (true) {
-                log.info("{} run task", Thread.currentThread().getId());
+//                log.info("{} run task", Thread.currentThread().getId());
                 Thread.sleep(2000);
             }
         } catch (InterruptedException e) {
-            log.info(e.getMessage());
+//            log.info(e.getMessage());
         }
     }
 }
