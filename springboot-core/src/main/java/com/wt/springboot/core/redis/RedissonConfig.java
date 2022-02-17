@@ -5,12 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
-import org.redisson.client.codec.Codec;
 import org.redisson.config.Config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.ClassUtils;
 
 /**
  * @author Pat.Wu
@@ -68,8 +66,8 @@ public class RedissonConfig {
                 .setIdleConnectionTimeout(idleConnectionTimeout)
 //                .setPingTimeout(pingTimeout)
                 .setPassword(password);
-        Codec codec = (Codec) ClassUtils.forName(getCodec(), ClassUtils.getDefaultClassLoader()).newInstance();
-        config.setCodec(codec);
+//        Codec codec = (Codec) ClassUtils.forName(getCodec(), ClassUtils.getDefaultClassLoader()).newInstance();
+//        config.setCodec(codec);
         config.setThreads(thread);
         config.setEventLoopGroup(new NioEventLoopGroup());
 //        config.setUseLinuxNativeEpoll(false);

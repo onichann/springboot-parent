@@ -1,5 +1,7 @@
 package com.wt.springboot.core.redis;
 
+import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisDistributedLock {
 
+    @Autowired
+    private RedissonClient redissonClient;
 
 
 }
