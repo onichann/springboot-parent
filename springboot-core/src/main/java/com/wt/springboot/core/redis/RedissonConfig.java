@@ -6,17 +6,15 @@ import lombok.Setter;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Pat.Wu
  * @date 2022/2/16 17:26
  * @description
  */
-@ConfigurationProperties(prefix = "spring.redisson")
-@Configuration
+//@ConfigurationProperties(prefix = "spring.redisson")
+//@Configuration
 @Getter
 @Setter
 public class RedissonConfig {

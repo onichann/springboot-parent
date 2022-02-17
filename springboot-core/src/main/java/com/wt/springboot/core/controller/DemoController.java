@@ -84,7 +84,7 @@ public class DemoController {
                         countDownLatch.await();
                         lock.lock();
                         System.out.println(Thread.currentThread().getName()+"-"+finalI+"获取锁到锁,doing");
-                        TimeUnit.SECONDS.sleep(40);
+//                        TimeUnit.SECONDS.sleep(40);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }finally {
