@@ -73,12 +73,12 @@ public class DemoController {
     @GetMapping("/lock")
     public void testLock() throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(1);
-        RLock lock = redissonClient.getLock("lock:test");
         for (int i = 0; i < 10; i++) {
             int finalI = i;
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    RLock lock = redissonClient.getLock("lock:test");
                     try {
                         System.out.println(Thread.currentThread().getName()+ "-"+finalI +"等待获取锁");
                         countDownLatch.await();

@@ -2,9 +2,9 @@ package com.wt.activiti.configuration;
 
 import com.eos.workflow.api.BPSServiceClientFactory;
 import com.eos.workflow.api.IWFDefinitionQueryManager;
-import com.gisinfo.activiti.repository.BPSWFDefinitionQueryManager;
-import com.gisinfo.activiti.repository.RepositoryService;
 import com.primeton.workflow.api.WFServiceException;
+import com.wt.activiti.repository.BPSWFDefinitionQueryManager;
+import com.wt.activiti.repository.RepositoryService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
