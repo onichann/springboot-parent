@@ -2,11 +2,15 @@ package com.wt.springboot.core;
 
 import lombok.SneakyThrows;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author Pat.Wu
@@ -215,8 +219,126 @@ public class CompletableFutureExapmle {
                 .thenApply(resultB -> resultB + " resultC");
         System.out.println(exceptionallyFuture.join());
 
+//        allOf 合并多个complete为一个，等待全部完成
+        System.out.println("--------------allof------------");
+
+        CompletableFuture<Double> cfN = CompletableFuture.supplyAsync(()->{
+            System.out.println(Thread.currentThread()+" start job1,time->"+System.currentTimeMillis());
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+            }
+            System.out.println(Thread.currentThread()+" exit job1,time->"+System.currentTimeMillis());
+            return 1.2;
+        });
+        CompletableFuture<Double> cfN2 = CompletableFuture.supplyAsync(()->{
+            System.out.println(Thread.currentThread()+" start job2,time->"+System.currentTimeMillis());
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+            }
+            if(true) throw new RuntimeException("test1");
+            System.out.println(Thread.currentThread()+" exit job2,time->"+System.currentTimeMillis());
+            return 3.2;
+        });
+        CompletableFuture<Double> cfN3 = CompletableFuture.supplyAsync(()->{
+            System.out.println(Thread.currentThread()+" start job3,time->"+System.currentTimeMillis());
+            try {
+                Thread.sleep(1300);
+            } catch (InterruptedException e) {
+            }
+            if(true) throw new RuntimeException("test");
+            System.out.println(Thread.currentThread()+" exit job3,time->"+System.currentTimeMillis());
+            return 2.2;
+        });
+        //allof等待所有任务执行完成才执行cf4，如果有一个任务异常终止，则cf4.get时会抛出异常，都是正常执行，cf4.get返回null
+        //anyOf是只有一个任务执行完成，无论是正常执行或者执行异常，都会执行cf4，cf4.get的结果就是已执行完成的任务的执行结果
+        CompletableFuture<Void> cfN4=CompletableFuture.allOf(cfN,cfN2,cfN3).whenComplete((a,b)->{
+            if(b!=null){
+                System.out.println("error stack trace->");
+                b.printStackTrace();
+            }else{
+                System.out.println("run succ,result->"+a);
+            }
+        });
+        System.out.println("main thread start cfN4.get(),time->"+System.currentTimeMillis());
+        //等待子任务执行完成
+//        System.out.println("cfN4 run result->"+cfN4.get());
+        System.out.println("main thread exit,time->"+System.currentTimeMillis());
+
+        //获取返回值方法：allof()
 
 
+        System.out.println("---------------anyof---------------------");
 
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("future1 doing");
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+            return "Result of Future 1";
+        });
+
+        CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("future2 doing");
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+            return "Result of Future 2";
+        });
+
+        CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("future3 doing");
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+            return "Result of Future 3";
+        });
+        CompletableFuture<Object> anyOfFuture = CompletableFuture.anyOf(future1, future2, future3);
+        CompletableFuture<String> stringCompletableFuture = anyOfFuture.thenApply(v -> "done");
+        System.out.println(anyOfFuture.get()); // Result of Future 2
+        System.out.println("--");
+
+
+        StringBuilder result = new StringBuilder();
+        List<String> messages = Arrays.asList("a", "b", "c");
+        List<CompletableFuture<String>> futures = messages.stream()
+                .map(msg -> CompletableFuture.completedFuture(msg).thenApplyAsync(m->{
+                    try {
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return m;
+                }).thenApplyAsync(String::toUpperCase))
+                .collect(Collectors.toList());
+        CompletableFuture<Void> done = CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()])).whenComplete((v, th) -> {
+            for (int i = 0; i < futures.size(); i++) {
+                CompletableFuture<String> stringCompletableFuture1 = futures.get(i);
+            }
+            result.append("done");
+        });
+
+        CompletableFuture<List<String>> listCompletableFuture = allOf(futures);
+        System.out.println(listCompletableFuture.join());
+        System.out.println("---end--");
+        //由Async 需要join  没有回直接在 then  whenComplete 是完成运行
+    }
+
+
+    public static <T> CompletableFuture<List<T>> allOf(List<CompletableFuture<T>> futuresList) {
+        CompletableFuture<Void> allFuturesResult =
+                CompletableFuture.allOf(futuresList.toArray(new CompletableFuture[futuresList.size()]));
+        return allFuturesResult.thenApply(v ->
+                futuresList.stream().
+                        map(CompletableFuture::join).
+                        collect(Collectors.<T>toList())
+        );
     }
 }
