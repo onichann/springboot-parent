@@ -97,4 +97,11 @@ public class DemoController {
         TimeUnit.SECONDS.sleep(2);
         countDownLatch.countDown();
     }
+
+    public static void main(String[] args) {
+        String a = "s";
+        String b = new String("s");
+        System.out.println(a==b);
+        System.out.println(a.equals(b));
+    }
 }
