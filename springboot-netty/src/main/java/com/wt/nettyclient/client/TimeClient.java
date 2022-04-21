@@ -53,6 +53,11 @@ public class TimeClient {
             System.out.println("收到服务端消息：" + msg);
         }
 
+        /**
+         * 通道连接就绪事件
+         * @param ctx
+         * @throws Exception
+         */
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
             ctx.writeAndFlush("我是客户端,现在是几点");

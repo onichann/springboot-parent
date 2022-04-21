@@ -33,7 +33,7 @@ public class TimeServer {
                     .childHandler(new ChildChannelHandler());
             //绑定端口，同步等待成功
             ChannelFuture f = b.bind(port).sync();
-            //等待服务端监听端口关闭
+            //等待服务端监听端口关闭  //监听通道的关闭状态
             f.channel().closeFuture().sync();
 
         }finally {
@@ -43,6 +43,7 @@ public class TimeServer {
         }
     }
 
+    @ChannelHandler.Sharable
     private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
         @Override
         protected void initChannel(SocketChannel socketChannel) throws Exception {

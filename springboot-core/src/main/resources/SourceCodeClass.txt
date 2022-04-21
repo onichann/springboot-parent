@@ -1,2 +1,3 @@
 SingletonSupplier--单例获取supplier
 ListenableFutureAdapter--适配器
+FastClass--cglib代理类
