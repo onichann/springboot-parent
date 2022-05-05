@@ -19,6 +19,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <!--            <version>4.0.10.Final</version>-->
+        </dependency>
+
+        <dependency>
             <groupId>com.wt</groupId>
             <artifactId>netty-rpc-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
