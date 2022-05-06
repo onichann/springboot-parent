@@ -11,6 +11,7 @@ private ResolvableType resolveDefaultEventType(ApplicationEvent event) {
 public boolean supportsEventType(Class<? extends ApplicationEvent> eventType) {
         return ApplicationReadyEvent.class.isAssignableFrom(eventType) || RefreshEvent.class.isAssignableFrom(eventType);
     }
+    // ApplicationReadyEvent 是不是 eventType的父类  ，（监听的父类，子类的消息就也会有了）
 
 
 GenericApplicationListenerAdapter  --75行  判定listener监听的事件类型 与 收到的事件是否一个类型
@@ -23,6 +24,10 @@ for(final IListener listener : tempLlisteners){
 							listener.event(event);
 						}
 					}
+
+事件监听  guava EventBus
+
+
 
 
 服务端请求  服务器  rsa公钥加密 aes key
