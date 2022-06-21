@@ -29,7 +29,9 @@ public class RedisConfig {
         }
         taskScheduler=new ThreadPoolTaskScheduler();
         taskScheduler.setPoolSize(20);
+        //IOC容器关闭时是否阻塞等待剩余的任务执行完成，默认:false（必须设置setAwaitTerminationSeconds）
         taskScheduler.setWaitForTasksToCompleteOnShutdown(true);
+        //阻塞IOC容器关闭的时间，默认：10秒（必须设置setWaitForTasksToCompleteOnShutdown）
         taskScheduler.setAwaitTerminationSeconds(60);
         return taskScheduler;
     }

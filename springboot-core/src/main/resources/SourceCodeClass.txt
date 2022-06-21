@@ -1,6 +1,7 @@
 SingletonSupplier--单例获取supplier
 ListenableFutureAdapter--适配器
 FastClass--cglib代理类
+TaskExecutorBuilder-- from.().to.()  **PropertyMapper学习
 
 String body = StreamUtils.copyToString(super.getInputStream(), StandardCharsets.UTF_8);
 
@@ -29,12 +30,15 @@ for(final IListener listener : tempLlisteners){
 
 
 
-
+--加解密
 服务端请求  服务器  rsa公钥加密 aes key
 
 客户端 rsa私钥解密 得到aes key  用aes加密 body数据  发送 + sha256摘要算法 body数据（通过request-hash header传输）
 
-服务端 aes key 解密 获得 摘要算法密文 然后和 header的摘要密文比对是否相同
+服务端 aes key 解密 获得 body数据  用相同摘要算法成密文 然后和 header的摘要密文比对是否相同
+
+第二种方案：
+
 
 
 私钥加签（发送给客户）   公钥解签

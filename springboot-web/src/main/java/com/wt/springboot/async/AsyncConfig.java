@@ -9,9 +9,13 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
 @EnableAsync
+/**
+ * https://blog.csdn.net/yaomingyang/article/details/108165496 原理
+ */
 public class AsyncConfig implements AsyncConfigurer{
 
     @Override
@@ -27,9 +31,14 @@ public class AsyncConfig implements AsyncConfigurer{
         taskExecutor.setQueueCapacity(2000);
         //初始化
         taskExecutor.initialize();
+        taskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         return taskExecutor;
     }
 
+    /**
+     * 当线程池执行异步任务时会抛出AsyncUncaughtExceptionHandler异常，
+     * 此方法会捕获该异常
+     */
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return new SimpleAsyncUncaughtExceptionHandler();

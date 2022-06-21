@@ -1,14 +1,17 @@
 创建型
-    -单例模式
-    -工厂模式
-    -原型模式
-    -生成器模式/建造者模式
+    -单例模式（Singleton Pattern）
+    -工厂模式（Factory Pattern） （Abstract Factory Pattern）
+    -原型模式（Prototype Pattern）
+    -生成器模式/建造者模式（Builder Pattern）
 结构型
-    -适配器模式
-    -装饰者模式
-    -代理模式
-    -外观模式
-    -桥接模式
+    -适配器模式（Adapter Pattern）
+    -装饰者模式（Decorator Pattern）
+    -代理模式（Proxy Pattern）
+    -外观模式（Facade Pattern）
+    -桥接模式（Bridge Pattern）
+    -组合模式（Composite Pattern）
+    -过滤器模式（Filter、Criteria Pattern）
+    -享元模式（Flyweight Pattern）
 
 
 
@@ -82,3 +85,17 @@
 4、外观模式注重的是简化接口，它更多的时候是从架构的层次去看整个系统，而并非单个类的层次。
 
 *桥接模式--将抽象部分与实现部分分离，使它们都可以独立的变化。
+
+*组合模式--又叫做部分-整体模式,它使我们树型结构的问题中,模糊了简单元素和复杂元素的概念,
+客户程序可以向处理简单元素一样来处理复杂元素,从而使得客户程序与复杂元素的内部结构解藕. e.g. DelegatingWebMvcConfiguration-WebMvcConfigurerComposite
+组成部分：
+Component: 为参加组合的对象声明一个公共接口, 不管是组合还是叶结点.
+Leaf: 在组合中表示叶子结点对象,叶子结点没有子结点.
+Composite: 表示参加组合的有子对象的对象, 并给出树枝购件的行为.
+
+*过滤器模式（Filter Pattern）或标准模式（Criteria Pattern）--是一种设计模式，这种模式允许开发人员使用不同的标准来**过滤一组对象**，
+通过逻辑运算以解耦的方式把它们连接起来。这种类型的设计模式属于结构型模式，它结合多个标准来获得单一标准。
+
+*享元模式（Flyweight Pattern）主要用于减少创建对象的数量，以减少内存占用和提高性能。
+这种类型的设计模式属于结构型模式，它提供了减少对象数量从而改善应用所需的对象结构的方式。
+享元模式以共享的方式高效地支持大量的细粒度对象。
