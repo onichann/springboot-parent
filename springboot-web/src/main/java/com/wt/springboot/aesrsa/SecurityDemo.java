@@ -2,6 +2,7 @@ package com.wt.springboot.aesrsa;
 
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.asymmetric.RSA;
+import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.crypto.symmetric.AES;
 import lombok.SneakyThrows;
 import sun.misc.BASE64Decoder;
@@ -36,8 +37,12 @@ public class SecurityDemo {
 //        System.out.println(s1);
 //        System.out.println("---------------");
 //        System.out.println(s.equals(s1));
-          testRSA();
-
+//          testRSA();
+        String xxx = SecureUtil.md5("xxx");
+        String xxx1 = DigestUtil.md5Hex("xxx");
+        System.out.println(xxx);
+        System.out.println(xxx1);
+        String xxx2 = DigestUtil.sha256Hex("xxx");
     }
 
 
