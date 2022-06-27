@@ -1,9 +1,9 @@
 package com.wt.springboot.data.jpa.QueryAndNamedQuery;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name="tb_clazz_query")
 @Data
 @NoArgsConstructor
-@Builder
+//@Builder
 @AllArgsConstructor
 public class Clazz_Query implements Serializable{
 	

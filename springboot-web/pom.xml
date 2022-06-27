@@ -15,6 +15,10 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
@@ -360,26 +364,41 @@
 
 		<plugins>
 
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					&lt;!&ndash;如果没有该配置项，devtools 不会起作用，应用不会restart&ndash;&gt;-->
+<!--					<fork>true</fork>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<!--如果没有该配置项，devtools 不会起作用，应用不会restart-->
-					<fork>true</fork>
-				</configuration>
 			</plugin>
-
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.9.0</version>
 				<configuration>
-					<!--单元测试失败继续构建-->
-					<!--<testFailureIgnore>true</testFailureIgnore>-->
-					<!--打包跳过测试包-->
-					<skipTests>true</skipTests>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
+
+
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-surefire-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					&lt;!&ndash;单元测试失败继续构建&ndash;&gt;-->
+<!--					&lt;!&ndash;<testFailureIgnore>true</testFailureIgnore>&ndash;&gt;-->
+<!--					&lt;!&ndash;打包跳过测试包&ndash;&gt;-->
+<!--					<skipTests>true</skipTests>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 
 		</plugins>
 	</build>

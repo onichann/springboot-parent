@@ -237,17 +237,17 @@
 
 	<build>
 		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-					<configuration>
-						<!--如果没有该配置项，devtools 不会起作用，应用不会restart-->
-						<fork>true</fork>
-					</configuration>
-				</plugin>
+<!--			<plugins>-->
+<!--				<plugin>-->
+<!--					<groupId>org.springframework.boot</groupId>-->
+<!--					<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--					<configuration>-->
+<!--						&lt;!&ndash;如果没有该配置项，devtools 不会起作用，应用不会restart&ndash;&gt;-->
+<!--						<fork>true</fork>-->
+<!--					</configuration>-->
+<!--				</plugin>-->
 
-			</plugins>
+<!--			</plugins>-->
 		</pluginManagement>
 	</build>
 
