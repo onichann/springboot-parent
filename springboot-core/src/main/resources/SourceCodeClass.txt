@@ -1,7 +1,7 @@
 SingletonSupplier--单例获取supplier
 ListenableFutureAdapter--适配器
 FastClass--cglib代理类
-TaskExecutorBuilder-- from.().to.()  **PropertyMapper学习
+TaskExecutorBuilder-- from.().to.()  **PropertyMapper学习 https://www.cnblogs.com/jiangxiewei/p/12980069.html
 
 String body = StreamUtils.copyToString(super.getInputStream(), StandardCharsets.UTF_8);
 
