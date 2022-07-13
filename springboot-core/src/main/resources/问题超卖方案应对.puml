@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+'https://blog.csdn.net/xiyang_1990/article/details/121991027
+
+autonumber
+User -> Client: 下单
+Client -> Server: 下单
+Server -> RocketMQ: 下单
+Server -> Redis: 下单中
+Server -> Client: 下单中
+Client -> User: 告知用户下单中
+alt 库存不足
+    RocketMQ -> Consumer: 消费消息，尝试下单
+    Consumer -> MySQL: 检查商品库存
+    MySQL -> Consumer: 库存不足
+    Consumer -> MySQL: 下单状态改为失败
+    Consumer -> Redis: 下单状态改为失败
+    Client -> Server: 轮训下单情况
+    Server -> Redis: 轮训下单情况
+    Redis -> Server: 下单失败
+    Server -> Client: 下单失败
+    Client -> User: 下单失败
+else 库存足够
+    autonumber 7
+    RocketMQ -> Consumer: 消费消息，尝试下单
+    Consumer -> MySQL: 检查商品库存
+    MySQL -> Consumer: 库存足够
+    Consumer -> MySQL: 减库存
+    Consumer -> MySQL: 下单状态改为成功
+    Consumer -> Redis: 下单状态改为待支付
+    Consumer -> RocketMQ: 半小时后检查是否支付
+    Client -> Server: 轮训下单情况
+    Server -> Redis: 轮训下单情况
+    Redis -> Server: 下单成功待支付
+    Server -> Client: 下单成功待支付
+    Client -> User: 弹出支付弹框
+    end
+
+== 支付超时检查 ==
+autonumber 1
+RocketMQ -> Consumer: 半小时后检查是否支付
+alt 订单已支付
+    Consumer -> MySQL: 确认消息消费
+else 订单未支付
+    Consumer -> MySQL: 支付超时->取消订单，关闭支付->确认消息消费
+    end
+
+== 支付回调 ==
+autonumber 1
+微信服务器 -> Server: 支付成功
+alt 支付已被关闭
+    Server -> 微信服务器: 退款
+else 支付未关闭
+    Server -> MySQL: 订单下单成功+支付成功
+    end
+@enduml
