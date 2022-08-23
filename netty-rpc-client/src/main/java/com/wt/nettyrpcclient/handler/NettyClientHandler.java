@@ -2,6 +2,7 @@ package com.wt.nettyrpcclient.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.util.concurrent.DefaultPromise;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Callable;
@@ -56,6 +57,8 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<String> impl
     @Override
     public synchronized Object call() throws Exception {
         context.writeAndFlush(reqMsg);
+        DefaultPromise<Object> promise = new DefaultPromise<>(context.channel().eventLoop());
+        
         //将线程处于等待状态
         wait();
         return respMsg;

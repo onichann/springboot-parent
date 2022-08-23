@@ -340,6 +340,22 @@
 			<systemPath>${project.basedir}/src/main/resources/common-spring-boot-starter-1.0.jar</systemPath>
 		</dependency>
 
+		<dependency>
+			<groupId>com.gisinfo</groupId>
+			<artifactId>sand-core</artifactId>
+			<version>2.2.4.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/gisinfo-sand-core-2.2.4.1.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.gisinfo</groupId>
+			<artifactId>sand-core1</artifactId>
+			<version>2.1.6.5</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/gisinfo-sand-core-2.1.6.5.jar</systemPath>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
