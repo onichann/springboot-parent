@@ -11,6 +11,7 @@ import java.util.concurrent.Callable;
  * @author wutong
  * @date 2022/4/24 14:43
  * 说明: 客户端业务处理类
+ * https://www.cnblogs.com/mic112/p/15565795.html#netty-rpc-consumer
  */
 @Component
 public class NettyClientHandler extends SimpleChannelInboundHandler<String> implements Callable<Object> {
