@@ -9,9 +9,7 @@ import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.persistence.entity.*;
 import org.activiti.engine.impl.util.ProcessDefinitionUtil;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author wutong
@@ -119,5 +117,81 @@ public class JumpTaskCmd implements Command<Void> {
         agenda.planContinueProcessInCompensation(currentExecutionEntity);
 
         return null;
+    }
+}
+
+
+public void endTask(String taskId) {
+    //  当前任务
+    Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+
+    BpmnModel bpmnModel = repositoryService.getBpmnModel(task.getProcessDefinitionId());
+    List<EndEvent> endEventList = bpmnModel.getMainProcess().findFlowElementsOfType(EndEvent.class);
+    FlowNode endFlowNode = endEventList.get(0);
+    FlowNode currentFlowNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement(task.getTaskDefinitionKey());
+
+    //  临时保存当前活动的原始方向
+    List originalSequenceFlowList = new ArrayList<>();
+    originalSequenceFlowList.addAll(currentFlowNode.getOutgoingFlows());
+    //  清理活动方向
+    currentFlowNode.getOutgoingFlows().clear();
+
+    //  建立新方向
+    SequenceFlow newSequenceFlow = new SequenceFlow();
+    newSequenceFlow.setId("newSequenceFlowId");
+    newSequenceFlow.setSourceFlowElement(currentFlowNode);
+    newSequenceFlow.setTargetFlowElement(endFlowNode);
+    List newSequenceFlowList = new ArrayList<>();
+    newSequenceFlowList.add(newSequenceFlow);
+    //  当前节点指向新的方向
+    currentFlowNode.setOutgoingFlows(newSequenceFlowList);
+
+    //  完成当前任务
+    taskService.complete(task.getId());
+
+    //  可以不用恢复原始方向，不影响其它的流程
+    currentFlowNode.setOutgoingFlows(originalSequenceFlowList);
+}
+
+
+
+
+private void dealByApprovalStatus(Integer approvalStatus, String taskId, String procDefId, String taskDefId, Integer approvalProcId) {
+    if (approvalStatus == 1) {
+        //通过情况 发送流程 且最后一个节点时候 把用户修改信息更新过去 、更新业务流程表状态
+        processService.completeTask(taskId, null);
+        boolean isLastUserTask = processService.isLastUserTask(procDefId, taskDefId);
+        if (isLastUserTask) {
+            //更新业务流程表状态
+            ApprovalProc approvalProc = approvalProcService.getById(approvalProcId);
+            approvalProc.setApprovalStatus(1);
+            approvalProc.setEndTime(new Date());
+            approvalProcService.updateById(approvalProc);
+            approvalSuccessAfter(approvalProcId);
+        }
+
+
+    }
+    if (approvalStatus == 2) {
+        //拒绝情况  流程结束掉 、更新业务流程表状态
+        ApprovalProc approvalProc = approvalProcService.getById(approvalProcId);
+        approvalProc.setApprovalStatus(2);
+        approvalProc.setEndTime(new Date());
+        approvalProcService.updateById(approvalProc);
+
+        try {
+            Context.setProcessEngineConfiguration(processEngineConfiguration);
+            Process process = ProcessDefinitionUtil.getProcess(procDefId);
+            FlowElement flowElement = process.getFlowElement(taskDefId);
+
+            if (isMultiInstance((UserTask) flowElement)) {
+                processService.endMultiInstanceTask(taskId, null);
+            } else {
+                processService.endTask(taskId);
+            }
+            approvalFailAfter(approvalProcId);
+        } finally {
+            Context.removeProcessEngineConfiguration();
+        }
     }
 }
