@@ -44,7 +44,7 @@
 		<hutool.all.version>4.1.19</hutool.all.version>
 		<guava.version>27.1-jre</guava.version>
 
-		<commons-fileupload.varsion>1.3.3</commons-fileupload.varsion>
+		<commons-fileupload.varsion>1.5</commons-fileupload.varsion>
 		<commons-collections.version>3.2.1</commons-collections.version>
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
 		<commons-lang3.version>3.9</commons-lang3.version>
